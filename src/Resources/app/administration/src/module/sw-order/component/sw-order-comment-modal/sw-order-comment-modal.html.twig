@@ -1,0 +1,97 @@
+{% block sw_order_comment_modal %}
+    <sw-modal
+        class="sw-order-comment-modal"
+        :title="$tc('sw-order.commentModal.labelTitle')"
+        :is-loading="isLoading"
+        @modal-close="closeModal"
+    >
+        {% block sw_order_comment_modal_info %}
+            <sw-container
+                class="sw-order-comment-modal__info-container"
+                columns="1fr 1fr"
+            >
+                <sw-description-list
+                    grid="120px 1fr"
+                >
+                    <dt>{{ $tc('sw-order.commentModal.labelCreatedBy') }}</dt>
+                    <dd>
+                        <sw-skeleton-bar
+                            v-if="isLoading"
+                        />
+                        <template v-else>
+                            {{ userName }}
+                        </template>
+                    </dd>
+                    <dt>{{ $tc('sw-order.commentModal.labelInternal') }}</dt>
+                    <dd>
+                        <sw-skeleton-bar
+                            v-if="isLoading"
+                        />
+                        <sw-switch-field
+                            v-else
+                            v-model="orderComment.internal"
+                            :label="$tc('sw-order.commentModal.labelInternal')"
+                        />
+                    </dd>
+                </sw-description-list>
+
+                <sw-description-list
+                    grid="120px 1fr"
+                >
+                    <dt>{{ $tc('sw-order.commentModal.labelCreatedAt') }}</dt>
+                    <dd>
+                        <sw-skeleton-bar
+                            v-if="isLoading"
+                        />
+                        <template v-else>
+                            {{ orderComment.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </template>
+                    </dd>
+                    <dt>{{ $tc('sw-order.commentModal.labelUpdatedAt') }}</dt>
+                    <dd>
+                        <sw-skeleton-bar
+                            v-if="isLoading"
+                        />
+                        <template v-else>
+                            {{ orderComment.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </template>
+                    </dd>
+                </sw-description-list>
+            </sw-container>
+        {% endblock %}
+
+        {% block sw_order_comment_modal_content %}
+            <sw-skeleton-bar
+                v-if="isLoading"
+                style="height: 125px"
+            />
+            <sw-textarea-field
+                v-else
+                v-model="orderComment.content"
+                required
+            />
+        {% endblock %}
+
+        {% block sw_order_comment_modal_footer %}
+            <template #modal-footer>
+                {% block sw_order_comment_modal_secondary_action %}
+                    <sw-button
+                        @click="closeModal"
+                    >
+                        {{ $tc('sw-order.commentModal.labelClose') }}
+                    </sw-button>
+                {% endblock %}
+
+                {% block sw_order_comment_modal_primary_action %}
+                    <sw-button
+                        :disabled="primaryActionDisabled"
+                        variant="primary"
+                        @click="saveComment"
+                    >
+                        {{ $tc('sw-order.commentModal.labelSave') }}
+                    </sw-button>
+                {% endblock %}
+            </template>
+        {% endblock %}
+    </sw-modal>
+{% endblock %}

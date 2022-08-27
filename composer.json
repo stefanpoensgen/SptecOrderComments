@@ -1,0 +1,40 @@
+{
+    "name": "sptec/order-comments",
+    "description": "Add comments to an order",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "version": "0.1.0",
+    "autoload": {
+        "psr-4": {
+            "SptecOrderComments\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SptecOrderComments\\Test\\": "tests/"
+        }
+    },
+    "extra": {
+        "shopware-plugin-class": "SptecOrderComments\\SptecOrderComments",
+        "label": {
+            "de-DE": "Kommentare zur Bestellung",
+            "en-GB": "Comments to the order"
+        },
+        "description": {
+            "de-DE": "Erlaubt es Kommentare zur Bestellung zu speicher.",
+            "en-GB": "Allows to save comments about the order."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://github.com/stefanpoensgen/SptecOrderComments",
+            "en-GB": "https://github.com/stefanpoensgen/SptecOrderComments"
+        },
+        "supportLink": {
+            "de-DE": "https://github.com/stefanpoensgen/SptecOrderComments/issues",
+            "en-GB": "https://github.com/stefanpoensgen/SptecOrderComments/issues"
+        }
+    },
+    "require": {
+        "shopware/core": "~6.4",
+        "shopware/administration": "~6.4"
+    }
+}

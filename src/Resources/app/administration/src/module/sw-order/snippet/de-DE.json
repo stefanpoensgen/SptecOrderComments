@@ -1,0 +1,28 @@
+{
+    "sw-order": {
+        "detail":{
+            "tabOrderComments": "Kommentare"
+        },
+        "commentCard": {
+            "textCommentsTotal": "Kein Kommentar | Ein Kommentar | {total} Kommentare",
+            "searchbarPlaceholder": "Kommentare durchsuchen",
+            "addCommentBtn": "Kommentar hinzufügen",
+            "deleteWarning": "Möchten Sie diesen Kommentar wirklich löschen?",
+            "labelCreatedBy": "Created by",
+            "labelCreatedAt": "Created at",
+            "labelUpdatedAt": "Updated at",
+            "labelInternal": "Intern",
+            "actionEdit": "Bearbeiten",
+            "actionDelete": "Löschen"
+        },
+        "commentModal": {
+            "labelTitle": "Kommentar",
+            "labelCreatedBy": "Erstellt von",
+            "labelCreatedAt": "Erstellt am",
+            "labelUpdatedAt": "Aktualisiert am",
+            "labelInternal": "Intern",
+            "labelClose": "Schließen",
+            "labelSave": "Speichern"
+        }
+    }
+}

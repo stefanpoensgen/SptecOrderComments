@@ -1,0 +1,35 @@
+.sw-order-comment-modal {
+    &__info-container {
+        margin-bottom: 16px;
+
+        .sw-description-list {
+            line-height: 15px;
+
+            dt,
+            dd {
+                padding: 8px;
+                border-bottom: none;
+            }
+
+            .sw-field--switch {
+                margin: 0;
+            }
+
+            .sw-field--switch__input {
+                padding: 0;
+            }
+
+            label {
+                padding: 0 10px;
+            }
+        }
+    }
+
+    .sw-field--textarea {
+        margin-bottom: 0;
+    }
+
+    .sw-skeleton-bar {
+        height: 20px;
+    }
+}

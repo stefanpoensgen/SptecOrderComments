@@ -1,0 +1,138 @@
+{% block sw_order_detail_comments %}
+    <sw-card
+        class="sw-order-detail-order-comments"
+        :title="$tc('sw-order.commentCard.textCommentsTotal', total, {total: total})"
+    >
+        {% block sw_order_detail_comments_toolbar %}
+            <template #toolbar>
+                <sw-card-filter
+                    :placeholder="$tc('sw-order.commentCard.searchbarPlaceholder')"
+                    @sw-card-filter-term-change="onChange"
+                >
+                    <template #filter>
+                        <sw-button
+                            size="small"
+                            @click="openModal"
+                        >
+                            <sw-icon
+                                name="small-default-plus-circle"
+                                small
+                            />
+                            {{ $tc('sw-order.commentCard.addCommentBtn') }}
+                        </sw-button>
+                    </template>
+                </sw-card-filter>
+            </template>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_container %}
+            <sw-container
+                v-for="(item, index) in orderComments"
+                :key="index"
+                slot="grid"
+                columns="350px auto"
+                gap="30px"
+            >
+                {% block sw_order_detail_comments_actions %}
+                    <sw-context-button>
+                        {% block sw_order_detail_comments_actions_edit %}
+                            <sw-context-menu-item
+                                @click="editComment(item.id)"
+                            >
+                                {{ $tc('sw-order.commentCard.actionEdit') }}
+                            </sw-context-menu-item>
+                        {% endblock %}
+
+                        {% block sw_order_detail_comments_actions_delete %}
+                            <sw-context-menu-item
+                                variant="danger"
+                                @click="deleteComment(item.id)"
+                            >
+                                {{ $tc('sw-order.commentCard.actionDelete') }}
+                            </sw-context-menu-item>
+                        {% endblock %}
+                    </sw-context-button>
+                {% endblock %}
+
+                {% block sw_order_detail_comments_info %}
+                    <sw-description-list
+                        grid="120px 1fr"
+                    >
+                        <dt>{{ $tc('sw-order.commentCard.labelCreatedAt') }}</dt>
+                        <dd>
+                            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </dd>
+                        <dt>{{ $tc('sw-order.commentCard.labelUpdatedAt') }}</dt>
+                        <dd>
+                            {{ item.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </dd>
+                        <dt>{{ $tc('sw-order.commentCard.labelCreatedBy') }}</dt>
+                        <dd>
+                            {{ item.createdBy.firstName }} {{ item.createdBy.lastName }}
+                        </dd>
+                        <dt>{{ $tc('sw-order.commentCard.labelInternal') }}</dt>
+                        <dd>
+                            <sw-icon
+                                v-if="item.internal"
+                                name="regular-checkmark-xs"
+                                small
+                                color="#189eff"
+                            />
+                            <sw-icon
+                                v-else
+                                name="regular-times-s"
+                                small
+                                color="#e65100"
+                            />
+                        </dd>
+                    </sw-description-list>
+                {% endblock %}
+                {% block sw_order_detail_comments_content %}
+                    <sw-block-field
+                        class="sw-field--textarea"
+                    >
+                        <template #sw-field-input>
+                        <textarea
+                            :value="item.content"
+                            readonly
+                        />
+                        </template>
+                    </sw-block-field>
+                {% endblock %}
+            </sw-container>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_footer %}
+            <template #footer>
+                <sw-pagination
+                    :page="page"
+                    :limit="limit"
+                    :total="total"
+                    :total-visible="7"
+                    @page-change="onPageChange"
+                />
+            </template>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_modal %}
+            <sw-order-comment-modal
+                v-if="showOrderCommentModal"
+                @close-modal="closeModal"
+                @reload-order-comments="getList"
+                :orderId="$route.params.id"
+                :orderCommentId="currentOrderCommentId"
+            />
+        {% endblock %}
+
+        {% block sw_order_detail_comments_warning_modal %}
+            <sw-confirm-modal
+                v-if="deleteOrderCommentId"
+                type="delete"
+                :text="$tc('sw-order.commentCard.deleteWarning')"
+                @confirm="onConfirmCommentDelete"
+                @close="onCancelCommentDelete"
+                @cancel="onCancelCommentDelete"
+            />
+        {% endblock %}
+    </sw-card>
+{% endblock %}
