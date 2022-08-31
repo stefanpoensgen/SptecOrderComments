@@ -12,7 +12,7 @@ Module.register('sptec-order-comments', {
                 path: '/sw/order/detail/:id/comments',
                 component: 'sw-order-detail-comments',
                 meta: {
-                    parentPath: 'sw.product.index',
+                    parentPath: 'sw.order.index',
                     privilege: 'order.viewer',
                 },
             });

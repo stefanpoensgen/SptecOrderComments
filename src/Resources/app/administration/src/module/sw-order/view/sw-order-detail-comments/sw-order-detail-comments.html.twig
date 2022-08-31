@@ -2,6 +2,7 @@
     <sw-card
         class="sw-order-detail-order-comments"
         :title="$tc('sw-order.commentCard.textCommentsTotal', total, {total: total})"
+        :isLoading="isLoading"
     >
         {% block sw_order_detail_comments_toolbar %}
             <template #toolbar>

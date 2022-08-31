@@ -17,6 +17,7 @@ Component.register('sw-order-detail-comments', {
 
     data() {
         return {
+            identifier: '',
             currentOrderCommentId: null,
             showOrderCommentModal: false,
             deleteOrderCommentId: null,
@@ -30,8 +31,14 @@ Component.register('sw-order-detail-comments', {
 
     metaInfo() {
         return {
-            title: 'Comments',
+            title: this.$createTitle(this.identifier, this.$tc('sw-order.detail.tabOrderComments')),
         };
+    },
+
+    watch: {
+        isLoading(value) {
+            this.$emit('loading-change', value);
+        },
     },
 
     computed: {
@@ -45,9 +52,9 @@ Component.register('sw-order-detail-comments', {
 
             criteria
                 .addAssociation('createdBy')
+                .addAssociation('order')
                 .addSorting(Criteria.sort(this.sortBy, this.sortDirection))
                 .addFilter(Criteria.equals('orderId', orderId));
-
 
             if (this.term !== null) {
                 criteria.setTerm(this.term);
@@ -59,13 +66,11 @@ Component.register('sw-order-detail-comments', {
 
     methods: {
         getList() {
-            this.isLoading = true;
-
-            return this.orderCommentRepository.search(this.orderCommentCriteria).then((searchResult) => {
+            this.orderCommentRepository.search(this.orderCommentCriteria).then((searchResult) => {
                 this.total = searchResult.total;
                 this.orderComments = searchResult;
+                this.identifier = searchResult.first().order.orderNumber;
                 this.isLoading = false;
-                return this.orderComments;
             }).catch(() => {
                 this.isLoading = false;
             });
@@ -77,28 +82,6 @@ Component.register('sw-order-detail-comments', {
             this.orderComments.criteria.setTerm(term);
 
             this.getList();
-        },
-
-        getColumns() {
-            return [{
-                property: 'content',
-                dataIndex: 'content',
-                label: 'sw-order.commentCard.columnContent',
-                width: '250px',
-                primary: true,
-            }, {
-                property: 'createdBy',
-                label: 'sw-order.commentCard.columnCreatedBy',
-            }, {
-                property: 'createdAt',
-                label: 'sw-order.commentCard.columnCreatedAt',
-            }, {
-                property: 'updatedAt',
-                label: 'sw-order.commentCard.columnUpdatedAt',
-            }, {
-                property: 'internal',
-                label: 'sw-order.commentCard.columnInternal',
-            }];
         },
 
         openModal() {
