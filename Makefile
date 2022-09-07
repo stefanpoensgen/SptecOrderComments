@@ -25,13 +25,13 @@ phpstan: ## Run phpstan
 	@php $(PROJECT_ROOT)/vendor/bin/phpstan analyze --configuration $(PLUGIN_ROOT)/phpstan.neon src tests
 .PHONY: phpstan
 
-phpunit:
+phpunit: ## Run phpunit
 	@composer dump-autoload --dev
 	@touch $(PLUGIN_ROOT)/vendor/composer/InstalledVersions.php
 	@$(PROJECT_ROOT)/vendor/bin/phpunit $(test)
 .PHONY: phpunit
 
-phpunit-coverage:
+phpunit-coverage: ## Run phpunit with code coverage
 	make phpunit test="--coverage-html coverage $(test)"
 .PHONY: phpunit
 

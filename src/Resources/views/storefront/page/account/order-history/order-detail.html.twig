@@ -1,0 +1,50 @@
+{% sw_extends "@Storefront/storefront/page/account/order-history/order-detail.html.twig" %}
+
+{% block page_account_order_item_detail_table_footer %}
+    {% set sptecOrderComments = order.extensions.sptecOrderComments %}
+    {% if sptecOrderComments.count > 0 %}
+        {% block sptec_order_comments %}
+            <div class="order-detail-content-body">
+                <div class="row order-detail-content-row">
+                    {% block sptec_order_comments_header %}
+                        <div class="col-12 card-title">
+                            {{ "sptec-order-comments.header"|trans|sw_sanitize }}
+                        </div>
+                    {% endblock %}
+
+                    {% block sptec_order_comments_content %}
+                        <div class="row">
+                            {% for comment in sptecOrderComments %}
+                                <div class="row sptec-order-comments-row">
+                                    <div class="col-12 col-md-4">
+                                        <dl class="row no-gutters sptec-order-comments-meta-data">
+                                            <dt class="col-6 col-md-6">
+                                                {{ "sptec-order-comments.createdAt"|trans|sw_sanitize }}
+                                            </dt>
+                                            <dd class="col-6 col-md-6">
+                                                {{ comment.createdAt|format_date('short', locale=app.request.locale) }}
+                                            </dd>
+                                            {% if comment.updatedAt %}
+                                                <dt class="col-6 col-md-6">
+                                                    {{ "sptec-order-comments.updatedAt"|trans|sw_sanitize }}
+                                                </dt>
+                                                <dd class="col-6 col-md-6">
+                                                    {{ comment.updatedAt|format_date('short', locale=app.request.locale) }}
+                                                </dd>
+                                            {% endif %}
+                                        </dl>
+                                    </div>
+                                    <div class="col-12 col-md-8 sptec-order-comments-comment">
+                                        {{ comment.content|sw_sanitize|nl2br }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endblock %}
+                </div>
+            </div>
+        {% endblock %}
+    {% endif %}
+
+    {{ parent() }}
+{% endblock %}

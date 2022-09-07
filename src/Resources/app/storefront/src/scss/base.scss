@@ -1,0 +1,11 @@
+.sptec-order-comments-row {
+    margin-bottom: $spacer;
+}
+
+.sptec-order-comments-row:nth-child(even) {
+    background-color: $gray-100;
+}
+
+.sptec-order-comments-meta-data {
+    margin-bottom: 0;
+}
