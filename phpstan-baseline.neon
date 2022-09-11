@@ -1,0 +1,61 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot call method getClass\\(\\) on Shopware\\\\Core\\\\Framework\\\\Event\\\\BusinessEventDefinition\\|null\\.$#"
+			count: 2
+			path: tests/Core/Checkout/Order/Subscriber/BusinessEventCollectorSubscriberTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\Framework\\\\Event\\\\BusinessEventCollector\" is private\\.$#"
+			count: 1
+			path: tests/Core/Checkout/Order/Subscriber/BusinessEventCollectorSubscriberTest.php
+
+		-
+			message: "#^Property SptecOrderComments\\\\Test\\\\OrderCommentTest\\:\\:\\$orderCommentRepository \\(Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\EntityRepository\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Extension/Checkout/Order/OrderComment/OrderCommentTest.php
+
+		-
+			message: "#^Service \"sptec_order_comment\\.repository\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/Extension/Checkout/Order/OrderComment/OrderCommentTest.php
+
+		-
+			message: "#^Property SptecOrderComments\\\\Test\\\\OrderCommentSubscriberTest\\:\\:\\$orderCommentRepository \\(Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\EntityRepositoryInterface\\) does not accept object\\|null\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Property SptecOrderComments\\\\Test\\\\OrderCommentSubscriberTest\\:\\:\\$orderCommentSubscriber is never read, only written\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Property SptecOrderComments\\\\Test\\\\OrderCommentSubscriberTest\\:\\:\\$salesChannelContextFactory is never read, only written\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Context\\\\SalesChannelContextFactory\" is private\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Service \"SptecOrderComments\\\\Subscriber\\\\OrderCommentSubscriber\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Service \"sptec_order_comment\\.repository\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderCommentSubscriberTest.php
+
+		-
+			message: "#^Service \"Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Context\\\\SalesChannelContextFactory\" is private\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderRouteRequestTest.php
+
+		-
+			message: "#^Service \"SptecOrderComments\\\\Subscriber\\\\OrderRouteRequestSubscriber\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/Subscriber/OrderRouteRequestTest.php

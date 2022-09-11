@@ -1,0 +1,8 @@
+{
+    "global": {
+        "businessEvents": {
+            "checkout_order_comment_created": "Comment on the order has been created",
+            "checkout_order_comment_updated": "Comment on the order has been updated"
+        }
+    }
+}

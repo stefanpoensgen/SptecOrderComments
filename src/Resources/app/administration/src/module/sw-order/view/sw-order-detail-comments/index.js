@@ -35,12 +35,6 @@ Component.register('sw-order-detail-comments', {
         };
     },
 
-    watch: {
-        isLoading(value) {
-            this.$emit('loading-change', value);
-        },
-    },
-
     computed: {
         orderCommentRepository() {
             return this.repositoryFactory.create('sptec_order_comment');
@@ -61,6 +55,12 @@ Component.register('sw-order-detail-comments', {
             }
 
             return criteria;
+        },
+    },
+
+    watch: {
+        isLoading(value) {
+            this.$emit('loading-change', value);
         },
     },
 

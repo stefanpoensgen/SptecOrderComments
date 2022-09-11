@@ -2,15 +2,14 @@
 
 ## Description
 
-This plugins adds the ability to store comments to orders in the Shopware Admin.
-Comments could either be internal (default) or external.
-External comments are shown at the order in account orders page.
+Adds the ability to store comments to orders in the Shopware Admin.
 
 ![Demonstration](https://raw.githubusercontent.com/stefanpoensgen/SptecOrderComments/main/src/Resources/store/images/1.png)
 
-### Planned Features
-
-- Send external comments to customer by mail
+### Features
+- Comments could either be internal (default) or external
+- External comments are displayed for the user on the order
+- Adds flow builder trigger for comment created and updated
 
 ## Contributing
 
