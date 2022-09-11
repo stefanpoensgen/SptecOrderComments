@@ -1,9 +1,14 @@
 {
     "name": "sptec/order-comments",
-    "description": "Add comments to an order",
+    "description": "Comments on the order",
     "type": "shopware-platform-plugin",
     "license": "MIT",
-    "version": "0.1.0",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Stefan Poensgen"
+        }
+    ],
     "autoload": {
         "psr-4": {
             "SptecOrderComments\\": "src/"
@@ -18,11 +23,11 @@
         "shopware-plugin-class": "SptecOrderComments\\SptecOrderComments",
         "label": {
             "de-DE": "Kommentare zur Bestellung",
-            "en-GB": "Comments to the order"
+            "en-GB": "Comments on the order"
         },
         "description": {
-            "de-DE": "Erlaubt es Kommentare zur Bestellung zu speicher.",
-            "en-GB": "Allows to save comments about the order."
+            "de-DE": "Mit diesem Plugin ist es möglich Kommentare zur Bestellungen über die Administration zu speichern.",
+            "en-GB": "This plugin adds the ability to store comments to orders in the administration."
         },
         "manufacturerLink": {
             "de-DE": "https://github.com/stefanpoensgen/SptecOrderComments",
