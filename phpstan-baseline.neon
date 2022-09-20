@@ -36,11 +36,6 @@ parameters:
 			path: tests/Subscriber/OrderCommentSubscriberTest.php
 
 		-
-			message: "#^Service \"Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Context\\\\SalesChannelContextFactory\" is private\\.$#"
-			count: 1
-			path: tests/Subscriber/OrderCommentSubscriberTest.php
-
-		-
 			message: "#^Service \"SptecOrderComments\\\\Subscriber\\\\OrderCommentSubscriber\" is not registered in the container\\.$#"
 			count: 1
 			path: tests/Subscriber/OrderCommentSubscriberTest.php
@@ -49,11 +44,6 @@ parameters:
 			message: "#^Service \"sptec_order_comment\\.repository\" is not registered in the container\\.$#"
 			count: 1
 			path: tests/Subscriber/OrderCommentSubscriberTest.php
-
-		-
-			message: "#^Service \"Shopware\\\\Core\\\\System\\\\SalesChannel\\\\Context\\\\SalesChannelContextFactory\" is private\\.$#"
-			count: 1
-			path: tests/Subscriber/OrderRouteRequestTest.php
 
 		-
 			message: "#^Service \"SptecOrderComments\\\\Subscriber\\\\OrderRouteRequestSubscriber\" is not registered in the container\\.$#"

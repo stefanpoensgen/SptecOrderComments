@@ -56,7 +56,7 @@ $phpStanConfig = str_replace(
     ],
     [
         str_replace($kernel->getProjectDir(), '', $kernel->getCacheDir()),
-        $projectRoot . (is_dir($projectRoot . '/platform') ? '/platform' : ''),
+        $projectRoot,
         str_replace('\\', '_', get_class($kernel)),
     ],
     $phpStanConfigDist
