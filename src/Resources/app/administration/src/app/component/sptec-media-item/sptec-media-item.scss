@@ -1,0 +1,62 @@
+@import "~scss/variables";
+
+$sptec-media-item-color-white: $color-white;
+$sptec-media-item-color-hover: $color-black;
+$sptec-media-item-color-border: $color-gray-300;
+$sptec-media-item-border-radius: $border-radius-default;
+
+.sptec-media-item {
+    position: relative;
+    border-radius: $sptec-media-item-border-radius;
+    border: 1px solid $sptec-media-item-color-border;
+
+    &__image {
+        width: 100%;
+        height: 100%;
+
+        .sw-media-preview-v2__item {
+            border-radius: $sptec-media-item-border-radius;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            max-height: 100%;
+            max-width: 100%;
+        }
+    }
+
+    &:hover {
+        background-color: $sptec-media-item-color-hover;
+
+        .sptec-media-item__image {
+            opacity: 0.7;
+        }
+
+        .sw-context-button__button {
+            visibility: visible;
+        }
+    }
+
+    &__context-button {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+    }
+
+    .sw-context-button__button {
+        visibility: hidden;
+
+        .sw-icon {
+            color: $sptec-media-item-color-white;
+            height: 100%;
+        }
+    }
+
+    &__modal {
+        .sw-media-preview-v2__item {
+            position: static;
+            transform: none;
+            top: auto;
+            left: auto;
+        }
+    }
+}

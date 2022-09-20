@@ -1,8 +1,13 @@
 import template from './sw-order-comment-modal.html.twig';
 import './sw-order-comment-modal.scss';
 
-const { Component } = Shopware;
+const { Component, Context, Utils } = Shopware;
+const Criteria = Shopware.Data.Criteria;
+const { isEmpty } = Utils.types;
 
+/**
+ * @private
+ */
 Component.register('sw-order-comment-modal', {
     template,
 
@@ -26,6 +31,7 @@ Component.register('sw-order-comment-modal', {
         return {
             isLoading: true,
             orderComment: undefined,
+            mediaModalIsOpen: false,
         };
     },
 
@@ -43,11 +49,29 @@ Component.register('sw-order-comment-modal', {
         },
 
         userName() {
+            if (this.orderComment.createdBy) {
+                return `${this.orderComment.createdBy.firstName} ${this.orderComment.createdBy.lastName}`;
+            }
+
             if (!this.currentUser) {
                 return '';
             }
 
             return `${this.currentUser.firstName} ${this.currentUser.lastName}`;
+        },
+
+        orderCommentMediaRepository() {
+            return this.repositoryFactory.create('sptec_order_comment_media');
+        },
+
+        orderCommentCriteria() {
+            const criteria = new Criteria(1, 100);
+
+            criteria
+                .addAssociation('createdBy')
+                .addAssociation('media');
+
+            return criteria;
         },
     },
 
@@ -83,11 +107,67 @@ Component.register('sw-order-comment-modal', {
         getOrderComment() {
             this.isLoading = true;
             this.orderCommentRepository
-                .get(this.orderCommentId, Shopware.Context.api)
+                .get(this.orderCommentId, Shopware.Context.api, this.orderCommentCriteria)
                 .then(orderComment => {
                     this.orderComment = orderComment;
                     this.isLoading = false;
                 });
+        },
+
+        createMediaAssociation(id) {
+            const orderCommentMedia = this.orderCommentMediaRepository.create(Context.api);
+            orderCommentMedia.mediaId = id;
+
+            return orderCommentMedia;
+        },
+
+        onOpenMediaModal() {
+            this.mediaModalIsOpen = true;
+        },
+
+        onCloseMediaModal() {
+            this.mediaModalIsOpen = false;
+        },
+
+        onImageUpload({ targetId }) {
+            if (this.orderComment.media.find((mediaItem) => mediaItem.mediaId === targetId)) {
+                return;
+            }
+
+            const orderCommentMedia = this.createMediaAssociation(targetId);
+            this.orderComment.media.add(orderCommentMedia);
+        },
+
+        onItemRemove(mediaItem) {
+            this.orderComment.media.remove(mediaItem.id);
+        },
+
+        onUploadFailed({ targetId }) {
+            const toRemove = this.orderComment.media.find((mediaItem) => {
+                return mediaItem.mediaId === targetId;
+            });
+            if (toRemove) {
+                this.orderComment.media.remove(toRemove.id);
+            }
+        },
+
+        onMediaSelectionChange(mediaItems) {
+            if (isEmpty(mediaItems)) {
+                return;
+            }
+
+            mediaItems.forEach((mediaItem) => {
+                if (!this.isExistingMedia(mediaItem)) {
+                    const orderCommentMedia = this.createMediaAssociation(mediaItem.id);
+                    this.orderComment.media.add(orderCommentMedia);
+                }
+            });
+        },
+
+        isExistingMedia(mediaItem) {
+            return this.orderComment.media.some(({ id, mediaId }) => {
+                return id === mediaItem.id || mediaId === mediaItem.id;
+            });
         },
     },
 });

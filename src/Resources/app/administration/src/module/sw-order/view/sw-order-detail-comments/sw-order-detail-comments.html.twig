@@ -26,81 +26,103 @@
             </template>
         {% endblock %}
 
-        {% block sw_order_detail_comments_container %}
-            <sw-container
+        {% block sw_order_detail_comments_item %}
+            <div
+                class="sw-order-detail-order-comments__item"
                 v-for="(item, index) in orderComments"
                 :key="index"
-                slot="grid"
-                columns="350px auto"
-                gap="30px"
             >
-                {% block sw_order_detail_comments_actions %}
-                    <sw-context-button>
-                        {% block sw_order_detail_comments_actions_edit %}
-                            <sw-context-menu-item
-                                @click="editComment(item.id)"
-                            >
-                                {{ $tc('sw-order.commentCard.actionEdit') }}
-                            </sw-context-menu-item>
-                        {% endblock %}
-
-                        {% block sw_order_detail_comments_actions_delete %}
-                            <sw-context-menu-item
-                                variant="danger"
-                                @click="deleteComment(item.id)"
-                            >
-                                {{ $tc('sw-order.commentCard.actionDelete') }}
-                            </sw-context-menu-item>
-                        {% endblock %}
-                    </sw-context-button>
-                {% endblock %}
-
-                {% block sw_order_detail_comments_info %}
-                    <sw-description-list
-                        grid="120px 1fr"
+                {% block sw_order_detail_comments_container %}
+                    <sw-container
+                        slot="grid"
+                        columns="350px auto"
+                        gap="30px"
                     >
-                        <dt>{{ $tc('sw-order.commentCard.labelCreatedAt') }}</dt>
-                        <dd>
-                            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
-                        </dd>
-                        <dt>{{ $tc('sw-order.commentCard.labelUpdatedAt') }}</dt>
-                        <dd>
-                            {{ item.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
-                        </dd>
-                        <dt>{{ $tc('sw-order.commentCard.labelCreatedBy') }}</dt>
-                        <dd>
-                            {{ item.createdBy.firstName }} {{ item.createdBy.lastName }}
-                        </dd>
-                        <dt>{{ $tc('sw-order.commentCard.labelInternal') }}</dt>
-                        <dd>
-                            <sw-icon
-                                v-if="item.internal"
-                                name="regular-checkmark-xs"
-                                small
-                                color="#189eff"
-                            />
-                            <sw-icon
-                                v-else
-                                name="regular-times-s"
-                                small
-                                color="#e65100"
-                            />
-                        </dd>
-                    </sw-description-list>
+                        {% block sw_order_detail_comments_info %}
+                            <sw-description-list
+                                grid="120px 1fr"
+                            >
+                                <dt>{{ $tc('sw-order.commentCard.labelCreatedAt') }}</dt>
+                                <dd>
+                                    {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                </dd>
+                                <dt>{{ $tc('sw-order.commentCard.labelUpdatedAt') }}</dt>
+                                <dd>
+                                    {{ item.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                </dd>
+                                <dt>{{ $tc('sw-order.commentCard.labelCreatedBy') }}</dt>
+                                <dd>
+                                    {{ item.createdBy.firstName }} {{ item.createdBy.lastName }}
+                                </dd>
+                                <dt>{{ $tc('sw-order.commentCard.labelInternal') }}</dt>
+                                <dd>
+                                    <sw-icon
+                                        v-if="item.internal"
+                                        name="regular-checkmark-xs"
+                                        small
+                                        color="#189eff"
+                                    />
+                                    <sw-icon
+                                        v-else
+                                        name="regular-times-s"
+                                        small
+                                        color="#e65100"
+                                    />
+                                </dd>
+                            </sw-description-list>
+                        {% endblock %}
+                        {% block sw_order_detail_comments_content %}
+                            <div
+                                class="sw-order-detail-order-comments__content"
+                            >
+                                {% block sw_order_detail_comments_actions %}
+                                    <sw-context-button>
+                                        {% block sw_order_detail_comments_actions_edit %}
+                                            <sw-context-menu-item
+                                                @click="editComment(item.id)"
+                                            >
+                                                {{ $tc('sw-order.commentCard.actionEdit') }}
+                                            </sw-context-menu-item>
+                                        {% endblock %}
+
+                                        {% block sw_order_detail_comments_actions_delete %}
+                                            <sw-context-menu-item
+                                                variant="danger"
+                                                @click="deleteComment(item.id)"
+                                            >
+                                                {{ $tc('sw-order.commentCard.actionDelete') }}
+                                            </sw-context-menu-item>
+                                        {% endblock %}
+                                    </sw-context-button>
+                                {% endblock %}
+                                <sw-block-field
+                                    class="sw-field--textarea"
+                                >
+                                    <template #sw-field-input>
+                                        <textarea
+                                            :value="item.content"
+                                            readonly
+                                        />
+                                    </template>
+                                </sw-block-field>
+                            </div>
+                        {% endblock %}
+                    </sw-container>
                 {% endblock %}
-                {% block sw_order_detail_comments_content %}
-                    <sw-block-field
-                        class="sw-field--textarea"
+                {% block sw_order_detail_comments_grid %}
+                    <div
+                        v-if="item.media.length > 0"
+                        class="sw-order-detail-order-comments__grid"
                     >
-                        <template #sw-field-input>
-                        <textarea
-                            :value="item.content"
-                            readonly
+                        <sptec-media-item
+                            v-for="(mediaItem, index) in item.media"
+                            :key="index"
+                            :item="mediaItem"
+                            @click="openMediaModal(mediaItem)"
                         />
-                        </template>
-                    </sw-block-field>
+                    </div>
                 {% endblock %}
-            </sw-container>
+            </div>
         {% endblock %}
 
         {% block sw_order_detail_comments_footer %}

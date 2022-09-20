@@ -1,0 +1,52 @@
+{% block sptec_media_item %}
+    <div
+        class="sptec-media-item"
+    >
+        {% block sptec_media_item_preview %}
+            <sw-media-preview-v2
+                class="sptec-media-item__image"
+                :source="item.mediaId"
+                :hide-tooltip="hideTooltip"
+                @click="showModal = !showModal"
+            />
+        {% endblock %}
+        {% block sptec_media_item_context_button %}
+            <sw-context-button
+                class="sptec-media-item__context-button"
+            >
+                {% block sptec_media_item_context_action_download %}
+                    <sw-context-menu-item
+                        @click="download"
+                    >
+                        {{ $tc('global.sptec-media-item.buttonDownload') }}
+                    </sw-context-menu-item>
+                {% endblock %}
+                {% block sptec_media_item_context_action_remove %}
+                    <sw-context-menu-item
+                        v-if="showRemove"
+                        variant="danger"
+                        @click="$emit('item-remove')"
+                    >
+                        {{ $tc('global.sptec-media-item.buttonRemove') }}
+                    </sw-context-menu-item>
+                {% endblock %}
+            </sw-context-button>
+        {% endblock %}
+        {% block sptec_media_item_modal %}
+            <sw-modal
+                class="sptec-media-item__modal"
+                v-if="showModal"
+                @modal-close="showModal = false"
+                :title="title"
+                variant="large"
+            >
+                {% block sptec_media_item_modal_preview %}
+                    <sw-media-preview-v2
+                        :source="item.mediaId"
+                        hideTooltip
+                        />
+                {% endblock %}
+            </sw-modal>
+        {% endblock %}
+    </div>
+{% endblock %}

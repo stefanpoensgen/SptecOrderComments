@@ -14,6 +14,7 @@ class SptecOrderComments extends Plugin
             return;
         }
 
+        $this->container->get(Connection::class)->executeStatement('DROP TABLE IF EXISTS sptec_order_comment_media');
         $this->container->get(Connection::class)->executeStatement('DROP TABLE IF EXISTS sptec_order_comment');
     }
 }

@@ -13,7 +13,7 @@
                     {% endblock %}
 
                     {% block sptec_order_comments_content %}
-                        <div class="row">
+                        <div class="col-12">
                             {% for comment in sptecOrderComments %}
                                 <div class="row sptec-order-comments-row">
                                     <div class="col-12 col-md-4">
@@ -30,6 +30,22 @@
                                                 </dt>
                                                 <dd class="col-6 col-md-6">
                                                     {{ comment.updatedAt|format_date('short', locale=app.request.locale) }}
+                                                </dd>
+                                            {% endif %}
+                                            {% if comment.media|length > 0 %}
+                                                <dt class="col-6 col-md-6">
+                                                    {{ "sptec-order-comments.media"|trans|sw_sanitize }}
+                                                </dt>
+                                                <dd class="col-12">
+                                                    {% for item in comment.media %}
+                                                        {% set media = item.media %}
+                                                        {% set file = media.fileName ~ '.' ~ media.fileExtension %}
+                                                        <div>
+                                                            <a href="{{ media.url }}" download="{{ file }}" rel="noopener" target="_blank">
+                                                                {{ file }}
+                                                            </a>
+                                                        </div>
+                                                    {% endfor %}
                                                 </dd>
                                             {% endif %}
                                         </dl>

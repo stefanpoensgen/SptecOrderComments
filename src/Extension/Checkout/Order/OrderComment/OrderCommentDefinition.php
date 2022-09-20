@@ -9,12 +9,14 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\BoolField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\FkField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\PrimaryKey;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\Required;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\SearchRanking;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\IdField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\LongTextField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ManyToOneAssociationField;
+use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\ReferenceVersionField;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\VersionField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
@@ -55,6 +57,8 @@ class OrderCommentDefinition extends EntityDefinition
 
             (new ManyToOneAssociationField('order', 'order_id', OrderDefinition::class, 'id', false))->addFlags(new ApiAware()),
             (new ManyToOneAssociationField('createdBy', 'created_by_id', UserDefinition::class, 'id', false))->addFlags(new ApiAware(), new SearchRanking(SearchRanking::ASSOCIATION_SEARCH_RANKING)),
+
+            (new OneToManyAssociationField('media', OrderCommentMediaDefinition::class, 'order_comment_id'))->addFlags(new ApiAware(), new CascadeDelete()),
         ]);
     }
 }

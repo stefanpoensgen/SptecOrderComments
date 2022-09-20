@@ -25,6 +25,8 @@ class OrderCommentEntity extends Entity
 
     protected bool $internal = true;
 
+    protected ?OrderCommentMediaCollection $media = null;
+
     public function getOrderId(): string
     {
         return $this->orderId;
@@ -83,5 +85,15 @@ class OrderCommentEntity extends Entity
     public function setInternal(bool $internal): void
     {
         $this->internal = $internal;
+    }
+
+    public function getMedia(): ?OrderCommentMediaCollection
+    {
+        return $this->media;
+    }
+
+    public function setMedia(OrderCommentMediaCollection $media): void
+    {
+        $this->media = $media;
     }
 }

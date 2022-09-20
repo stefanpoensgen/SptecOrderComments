@@ -16,6 +16,7 @@ use Shopware\Core\System\User\UserEntity;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentCreatedEvent;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentUpdatedEvent;
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinition;
+use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentEntity;
 use SptecOrderComments\Subscriber\OrderCommentSubscriber;
 
 class OrderCommentSubscriberTest extends TestCase
@@ -88,10 +89,19 @@ class OrderCommentSubscriberTest extends TestCase
         $content = Uuid::randomHex();
         $writtenEvent = $this->createOrderComment($content, false);
         $event = $writtenEvent->getEventByEntityName(OrderCommentDefinition::ENTITY_NAME);
+        $id = $writtenEvent->getPrimaryKeys(OrderCommentDefinition::ENTITY_NAME)[0];
+
+        $criteria = new Criteria([$id]);
+        $criteria->addAssociation('media');
+        $context = new Context(new SystemSource());
+
+        /** @var OrderCommentEntity $orderComment */
+        $orderComment = $this->orderCommentRepository->search($criteria, $context)->first();
 
         static::assertNotNull($event);
         static::assertNotEmpty($event->getWriteResults()[0]);
-        static::assertSame($content, $event->getWriteResults()[0]->getPayload()['content']);
+        static::assertSame($content, $orderComment->getContent());
+        static::assertNotNull($orderComment->getMedia());
         static::assertInstanceOf(CheckoutOrderCommentCreatedEvent::class, $caughtEvent);
     }
 
@@ -126,12 +136,23 @@ class OrderCommentSubscriberTest extends TestCase
         /** @var OrderEntity $order */
         $order = $this->orderRepository->search(new Criteria(), $context)->first();
 
+        $mediaId = Uuid::randomHex();
+
         return $this->orderCommentRepository->create([
             [
                 'orderId' => $order->getId(),
                 'content' => $content,
                 'internal' => $internal,
                 'createdById' => $user->getId(),
+                'media' => [
+                    [
+                        'id' => $mediaId,
+                        'media' => [
+                            'id' => $mediaId,
+                            'name' => 'test file',
+                        ],
+                    ],
+                ],
             ],
         ], $context);
     }
@@ -140,11 +161,12 @@ class OrderCommentSubscriberTest extends TestCase
     {
         $context = new Context(new SystemSource());
 
-        $orderComment = $this->orderCommentRepository->search(new Criteria(), $context)->first();
+        $writtenEvent = $this->createOrderComment('updateMe', $internal);
+        $id = $writtenEvent->getPrimaryKeys(OrderCommentDefinition::ENTITY_NAME)[0];
 
         return $this->orderCommentRepository->update([
             [
-                'id' => $orderComment->getId(),
+                'id' => $id,
                 'content' => $content,
                 'internal' => $internal,
             ],

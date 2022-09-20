@@ -15,6 +15,11 @@
             <tag name="shopware.entity.extension"/>
         </service>
 
+        <service id="SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentMediaDefinition">
+            <tag name="shopware.composite_search.definition"/>
+            <tag name="shopware.entity.definition"/>
+        </service>
+
         <service id="SptecOrderComments\Subscriber\OrderRouteRequestSubscriber">
             <tag name="kernel.event_subscriber"/>
         </service>

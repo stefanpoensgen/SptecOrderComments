@@ -4,6 +4,9 @@ import './sw-order-detail-comments.scss';
 const { Component, Context, Mixin } = Shopware;
 const Criteria = Shopware.Data.Criteria;
 
+/**
+ * @private
+ */
 Component.register('sw-order-detail-comments', {
     template,
 
@@ -47,6 +50,7 @@ Component.register('sw-order-detail-comments', {
             criteria
                 .addAssociation('createdBy')
                 .addAssociation('order')
+                .addAssociation('media')
                 .addSorting(Criteria.sort(this.sortBy, this.sortDirection))
                 .addFilter(Criteria.equals('orderId', orderId));
 

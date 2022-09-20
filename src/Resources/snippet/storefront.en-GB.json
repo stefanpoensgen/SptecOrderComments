@@ -1,7 +1,8 @@
 {
-    "sptec-order-comments": {
-        "header": "Comments",
-        "createdAt": "Created at:",
-        "updatedAt": "Updated at:"
-    }
+  "sptec-order-comments": {
+    "header": "Comments",
+    "createdAt": "Created at:",
+    "updatedAt": "Updated at:",
+    "media": "Media:"
+  }
 }

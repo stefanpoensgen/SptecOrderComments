@@ -19,6 +19,7 @@ class OrderRouteRequestSubscriber implements EventSubscriberInterface
     {
         $criteria = $event->getCriteria();
         $criteria->addAssociation('sptecOrderComments');
+        $criteria->addAssociation('sptecOrderComments.media');
         $criteria->getAssociation('sptecOrderComments')->addFilter(new EqualsFilter('internal', false));
     }
 }

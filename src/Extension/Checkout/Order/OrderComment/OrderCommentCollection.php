@@ -7,13 +7,7 @@ namespace SptecOrderComments\Extension\Checkout\Order\OrderComment;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
 
 /**
- * @method void                    add(OrderCommentEntity $entity)
- * @method void                    set(string $key, OrderCommentEntity $entity)
- * @method OrderCommentEntity[]    getIterator()
- * @method OrderCommentEntity[]    getElements()
- * @method OrderCommentEntity|null get(string $key)
- * @method OrderCommentEntity|null first()
- * @method OrderCommentEntity|null last()
+ * @extends EntityCollection<OrderCommentEntity>
  */
 class OrderCommentCollection extends EntityCollection
 {

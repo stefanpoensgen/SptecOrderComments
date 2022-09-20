@@ -1,8 +1,15 @@
 {
-    "global": {
-        "businessEvents": {
-            "checkout_order_comment_created": "Comment on the order has been created",
-            "checkout_order_comment_updated": "Comment on the order has been updated"
-        }
+  "global": {
+    "businessEvents": {
+      "checkout_order_comment_created": "Comment on the order has been created",
+      "checkout_order_comment_updated": "Comment on the order has been updated"
+    },
+    "sptec-media-item": {
+      "buttonRemove": "Remove",
+      "buttonDownload": "Download"
+    },
+    "entities": {
+      "sptec_order_comment": "Order comment"
     }
+  }
 }

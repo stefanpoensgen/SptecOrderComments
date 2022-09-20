@@ -1,6 +1,10 @@
 @import "~scss/variables";
 
 .sw-order-detail-order-comments {
+    .sw-card__content {
+        padding: 0;
+    }
+
     .sw-description-list {
         line-height: 15px;
 
@@ -11,22 +15,33 @@
         }
     }
 
-    .sw-context-button {
-        position: absolute;
-        right: 4px;
-        top: 4px;
-    }
-
     .sw-field {
         margin-bottom: 0;
     }
 
-    .sw-container {
+    &__content {
         position: relative;
+
+        .sw-context-button {
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+    }
+
+    &__item {
         padding: 30px;
     }
 
-    .sw-container:nth-child(even) {
+    &__item:nth-child(even) {
         background-color: $color-gray-100;
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        grid-gap: 10px;
+        grid-auto-rows: 90px;
+        margin-top: 20px;
     }
 }
