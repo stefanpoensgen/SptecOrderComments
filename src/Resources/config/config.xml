@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/platform/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+
+    <card>
+        <title>Configuration</title>
+        <title lang="de-DE">Konfiguration</title>
+        <input-field>
+            <name>extensionWhitelist</name>
+            <label>File extension whitelist</label>
+            <label lang="de-DE">Whitelist für Dateierweiterungen</label>
+            <helpText>Comma separated list of allowed file extensions for media files.</helpText>
+            <helpText lang="de-DE">Durch Kommas getrennte Liste der zulässigen Dateierweiterungen für Medien.</helpText>
+            <type>text</type>
+            <placeholder>docx, xlsx</placeholder>
+        </input-field>
+    </card>
+</config>

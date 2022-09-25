@@ -21,6 +21,11 @@ parameters:
 			path: tests/Extension/Checkout/Order/OrderComment/OrderCommentTest.php
 
 		-
+			message: "#^Service \"SptecOrderComments\\\\Subscriber\\\\MediaFileExtensionWhitelistSubscriber\" is not registered in the container\\.$#"
+			count: 1
+			path: tests/Subscriber/MediaFileExtensionWhitelistSubscriberTest.php
+
+		-
 			message: "#^Property SptecOrderComments\\\\Test\\\\OrderCommentSubscriberTest\\:\\:\\$orderCommentRepository \\(Shopware\\\\Core\\\\Framework\\\\DataAbstractionLayer\\\\EntityRepositoryInterface\\) does not accept object\\|null\\.$#"
 			count: 1
 			path: tests/Subscriber/OrderCommentSubscriberTest.php
