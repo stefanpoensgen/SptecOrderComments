@@ -8,6 +8,7 @@ Features
 - Comments could either be internal (default) or external
 - External comments are displayed for the user on the order
 - Adds flow builder trigger for comment created and updated
+- Media can be saved to comments
 
 Requirements
 -----
@@ -20,8 +21,14 @@ Screenshots
 
 Installation
 ====
+
+### Zip Installation package for the Shopware Plugin Manager
 * Download the latest plugin version
 * Upload and install plugin using Plugin Manager
+
+### Install with composer
+* Change to your root Installation of shopware
+* Run command `composer require sptec/order-comments` and install and active plugin with Plugin Manager
 
 Contributing
 -----
