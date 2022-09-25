@@ -93,6 +93,7 @@
                                     v-else
                                     v-model="orderComment.content"
                                     required
+                                    :error="orderCommentContentError"
                                 />
                             {% endblock %}
                         </template>

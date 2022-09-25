@@ -52,11 +52,13 @@ $sptec-media-item-border-radius: $border-radius-default;
     }
 
     &__modal {
+        .sw-modal__body {
+            text-align: center;
+        }
+
         .sw-media-preview-v2__item {
             position: static;
             transform: none;
-            top: auto;
-            left: auto;
         }
     }
 }

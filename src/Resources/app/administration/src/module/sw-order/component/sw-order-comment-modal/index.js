@@ -2,6 +2,7 @@ import template from './sw-order-comment-modal.html.twig';
 import './sw-order-comment-modal.scss';
 
 const { Component, Context, Utils } = Shopware;
+const { mapPropertyErrors } = Component.getComponentHelper();
 const Criteria = Shopware.Data.Criteria;
 const { isEmpty } = Utils.types;
 
@@ -36,12 +37,14 @@ Component.register('sw-order-comment-modal', {
     },
 
     computed: {
+        ...mapPropertyErrors('orderComment', ['content']),
+
         orderCommentRepository() {
             return this.repositoryFactory.create('sptec_order_comment');
         },
 
         primaryActionDisabled() {
-            return !this.orderComment || this.orderComment.content === '';
+            return !this.orderComment || !this.orderComment.content || this.orderComment.content === '';
         },
 
         currentUser() {
