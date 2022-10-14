@@ -57,6 +57,20 @@
                                                 :label="$tc('sptec-order-comments.modal.labelInternal')"
                                             />
                                         </dd>
+                                        <dt>{{ $tc('sptec-order-comments.modal.labelTask') }}</dt>
+                                        <dd>
+                                            <sw-skeleton-bar
+                                                v-if="isLoading"
+                                            />
+                                            <sw-single-select
+                                                v-else
+                                                v-model="orderComment.task"
+                                                :class="taskOptionClass"
+                                                :options="taskOptions"
+                                                disableSearchFunction
+                                                size="small"
+                                            />
+                                        </dd>
                                     </sw-description-list>
 
                                     <sw-description-list

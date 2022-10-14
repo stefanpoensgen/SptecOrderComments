@@ -33,6 +33,20 @@ Component.register('sptec-order-comments-modal', {
             isLoading: true,
             orderComment: undefined,
             mediaModalIsOpen: false,
+            taskOptions: [
+                {
+                    value: null,
+                    label: this.$tc('sptec-order-comments.modal.taskNull'),
+                },
+                {
+                    value: true,
+                    label: this.$tc('sptec-order-comments.modal.taskTrue'),
+                },
+                {
+                    value: false,
+                    label: this.$tc('sptec-order-comments.modal.taskFalse'),
+                },
+            ],
         };
     },
 
@@ -76,6 +90,18 @@ Component.register('sptec-order-comments-modal', {
 
             return criteria;
         },
+
+        taskOptionClass() {
+            if (this.orderComment.task === true) {
+                return 'orange';
+            }
+
+            if (this.orderComment.task === false) {
+                return 'green';
+            }
+
+            return 'gray';
+        },
     },
 
     created() {
@@ -93,6 +119,7 @@ Component.register('sptec-order-comments-modal', {
             this.orderComment.createdById = this.currentUser.id;
             this.orderComment.orderId = this.orderId;
             this.orderComment.internal = true;
+            this.orderComment.task = null;
             this.isLoading = false;
         },
 

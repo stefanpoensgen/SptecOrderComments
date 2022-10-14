@@ -25,6 +25,14 @@
         margin-bottom: 0;
     }
 
+    .sw-field.sw-block-field.sw-field--textarea textarea {
+        min-height: 155px;
+    }
+
+    .sw-color-badge {
+        margin: 0 8px 1px 0;
+    }
+
     &__content {
         position: relative;
 

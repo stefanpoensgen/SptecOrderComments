@@ -86,6 +86,7 @@ class OrderCommentTest extends TestCase
             'orderId' => $orderId,
             'createdById' => $userId,
             'internal' => true,
+            'task' => true,
             'content' => 'Lorem ipsum dolor sit amet, consetetur sadipscing elitr',
         ]], $context);
 

@@ -16,8 +16,12 @@
       "labelInternal": "Internal",
       "labelClose": "Close",
       "labelSave": "Save",
+      "labelTask": "Task",
       "tabGeneral": "General",
-      "tabMedia": "Media"
+      "tabMedia": "Media",
+      "taskNull": "No",
+      "taskTrue": "Open",
+      "taskFalse": "Done"
     },
     "item": {
       "deleteWarning": "Are you sure you want to delete this comment?",
@@ -25,6 +29,7 @@
       "labelCreatedAt": "Created at",
       "labelUpdatedAt": "Updated at",
       "labelInternal": "Internal",
+      "labelTask": "Task",
       "actionEdit": "Edit",
       "actionDelete": "Delete"
     }

@@ -25,6 +25,8 @@ class OrderCommentEntity extends Entity
 
     protected bool $internal = true;
 
+    protected ?bool $task = null;
+
     protected ?OrderCommentMediaCollection $media = null;
 
     public function getOrderId(): string
@@ -85,6 +87,16 @@ class OrderCommentEntity extends Entity
     public function setInternal(bool $internal): void
     {
         $this->internal = $internal;
+    }
+
+    public function getTask(): ?bool
+    {
+        return $this->task;
+    }
+
+    public function setTask(?bool $task): void
+    {
+        $this->task = $task;
     }
 
     public function getMedia(): ?OrderCommentMediaCollection

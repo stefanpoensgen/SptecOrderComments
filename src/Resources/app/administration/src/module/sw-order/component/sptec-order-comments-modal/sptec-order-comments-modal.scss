@@ -1,3 +1,5 @@
+@import "~scss/variables";
+
 .sptec-order-comments-modal {
     &__info-container {
         margin-bottom: 16px;
@@ -31,5 +33,72 @@
 
     .sw-skeleton-bar {
         height: 20px;
+    }
+
+    .sw-single-select {
+        max-width: 120px;
+
+        input,
+        .sw-block-field__block {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .sw-single-select__selection-text,
+        .sw-single-select__selection-input {
+            padding: 0 8px;
+            min-height: 22px;
+        }
+    }
+
+    .sw-single-select.green {
+        input,
+        .sw-block-field__block {
+            background-color: $color-emerald-50;
+        }
+
+        .sw-single-select__selection-text {
+            color: $color-emerald-700;
+        }
+
+        .sw-select__select-indicator {
+            svg {
+                color: $color-emerald-700;
+            }
+        }
+    }
+
+    .sw-single-select.orange {
+        input,
+        .sw-block-field__block {
+            background-color: $color-pumpkin-spice-50;
+        }
+
+        .sw-single-select__selection-text {
+            color: $color-pumpkin-spice-500;
+        }
+
+        .sw-select__select-indicator {
+            svg {
+                color: $color-pumpkin-spice-500;
+            }
+        }
+    }
+
+    .sw-single-select.gray {
+        input,
+        .sw-block-field__block {
+            background-color: $color-gray-100;
+        }
+
+        .sw-single-select__selection-text {
+            color: $color-darkgray-200;
+        }
+
+        .sw-select__select-indicator {
+            svg {
+                color: $color-darkgray-200;
+            }
+        }
     }
 }

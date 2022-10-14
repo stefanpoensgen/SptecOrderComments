@@ -54,6 +54,7 @@ class OrderCommentDefinition extends EntityDefinition
 
             (new LongTextField('content', 'content'))->addFlags(new ApiAware(), new Required(), new SearchRanking(SearchRanking::HIGH_SEARCH_RANKING)),
             (new BoolField('internal', 'internal'))->addFlags(new ApiAware(), new Required()),
+            (new BoolField('task', 'task'))->addFlags(new ApiAware()),
 
             (new ManyToOneAssociationField('order', 'order_id', OrderDefinition::class, 'id', false))->addFlags(new ApiAware()),
             (new ManyToOneAssociationField('createdBy', 'created_by_id', UserDefinition::class, 'id', false))->addFlags(new ApiAware(), new SearchRanking(SearchRanking::ASSOCIATION_SEARCH_RANKING)),

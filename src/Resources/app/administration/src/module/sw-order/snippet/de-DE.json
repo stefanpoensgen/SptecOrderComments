@@ -9,15 +9,6 @@
     "searchbarPlaceholder": "Kommentare durchsuchen",
     "addCommentBtn": "Kommentar hinzufügen",
     "modal": {
-      "deleteWarning": "Möchten Sie diesen Kommentar wirklich löschen?",
-      "labelCreatedBy": "Erstellt von",
-      "labelCreatedAt": "Erstellt am",
-      "labelUpdatedAt": "Aktualisiert am",
-      "labelInternal": "Intern",
-      "actionEdit": "Bearbeiten",
-      "actionDelete": "Löschen"
-    },
-    "item": {
       "labelTitle": "Kommentar",
       "labelCreatedBy": "Erstellt von",
       "labelCreatedAt": "Erstellt am",
@@ -25,8 +16,22 @@
       "labelInternal": "Intern",
       "labelClose": "Schließen",
       "labelSave": "Speichern",
-      "tabGeneral": "Allgemein",
-      "tabMedia": "Medien"
+      "labelTask": "Task",
+      "tabGeneral": "General",
+      "tabMedia": "Media",
+      "taskNull": "Keine",
+      "taskTrue": "Offen",
+      "taskFalse": "Erledigt"
+    },
+    "item": {
+      "deleteWarning": "Möchten Sie diesen Kommentar wirklich löschen?",
+      "labelCreatedBy": "Erstellt von",
+      "labelCreatedAt": "Erstellt am",
+      "labelUpdatedAt": "Aktualisiert am",
+      "labelInternal": "Intern",
+      "labelTask": "Task",
+      "actionEdit": "Bearbeiten",
+      "actionDelete": "Löschen"
     }
   }
 }

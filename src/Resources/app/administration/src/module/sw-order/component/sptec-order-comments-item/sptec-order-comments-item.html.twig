@@ -37,6 +37,36 @@
                                 color="#e65100"
                             />
                         </dd>
+                        <dt>{{ $tc('sptec-order-comments.item.labelTask') }}</dt>
+                        <dd>
+                            <template
+                                v-if="item.task === true"
+                            >
+                                <sw-color-badge
+                                    color="#ffab22"
+                                    rounded
+                                />
+                                {{ $tc('sptec-order-comments.modal.taskTrue') }}
+                            </template>
+                            <template
+                                v-else-if="item.task === false"
+                            >
+                                <sw-color-badge
+                                    color="#37d046"
+                                    rounded
+                                />
+                                {{ $tc('sptec-order-comments.modal.taskFalse') }}
+                            </template>
+                            <template
+                                v-else
+                            >
+                                <sw-color-badge
+                                    color="#94a6b8"
+                                    rounded
+                                />
+                                {{ $tc('sptec-order-comments.modal.taskNull') }}
+                            </template>
+                        </dd>
                     </sw-description-list>
                 {% endblock %}
                 {% block sptec_order_comments_item_content %}
