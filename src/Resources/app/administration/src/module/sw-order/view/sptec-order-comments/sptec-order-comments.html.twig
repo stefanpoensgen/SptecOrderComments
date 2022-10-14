@@ -1,0 +1,74 @@
+{% block sw_order_detail_comments %}
+    <sw-card
+        class="sptec-order-comments"
+        :title="$tc('sptec-order-comments.textCommentsTotal', total, {total: total})"
+        :isLoading="isLoading"
+    >
+        {% block sw_order_detail_comments_toolbar %}
+            <template #toolbar>
+                <sw-card-filter
+                    :placeholder="$tc('sptec-order-comments.searchbarPlaceholder')"
+                    @sw-card-filter-term-change="onChange"
+                >
+                    <template #filter>
+                        <sw-button
+                            size="small"
+                            @click="openModal"
+                        >
+                            <sw-icon
+                                name="small-default-plus-circle"
+                                small
+                            />
+                            {{ $tc('sptec-order-comments.addCommentBtn') }}
+                        </sw-button>
+                    </template>
+                </sw-card-filter>
+            </template>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_item %}
+            <template v-if="total">
+                <sptec-order-comments-item
+                    v-for="item in orderComments"
+                    :key="item.id"
+                    :item="item"
+                    @edit="editComment"
+                    @delete="deleteComment"
+                />
+            </template>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_footer %}
+            <template #footer>
+                <sw-pagination
+                    :page="page"
+                    :limit="limit"
+                    :total="total"
+                    :total-visible="7"
+                    @page-change="onPageChange"
+                />
+            </template>
+        {% endblock %}
+
+        {% block sw_order_detail_comments_modal %}
+            <sptec-order-comments-modal
+                v-if="showOrderCommentModal"
+                @close-modal="closeModal"
+                @reload-order-comments="getList"
+                :orderId="$route.params.id"
+                :orderCommentId="currentOrderCommentId"
+            />
+        {% endblock %}
+
+        {% block sw_order_detail_comments_warning_modal %}
+            <sw-confirm-modal
+                v-if="deleteOrderCommentId"
+                type="delete"
+                :text="$tc('sptec-order-comments.item.deleteWarning')"
+                @confirm="onConfirmCommentDelete"
+                @close="onCancelCommentDelete"
+                @cancel="onCancelCommentDelete"
+            />
+        {% endblock %}
+    </sw-card>
+{% endblock %}

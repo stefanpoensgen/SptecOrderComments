@@ -2,20 +2,13 @@
   "sw-order": {
     "detail": {
       "tabOrderComments": "Comments"
-    },
-    "commentCard": {
-      "textCommentsTotal": "No comment | One comment | {total} comments",
-      "searchbarPlaceholder": "Search comments",
-      "addCommentBtn": "Add Comment",
-      "deleteWarning": "Are you sure you want to delete this comment?",
-      "labelCreatedBy": "Created by",
-      "labelCreatedAt": "Created at",
-      "labelUpdatedAt": "Updated at",
-      "labelInternal": "Internal",
-      "actionEdit": "Edit",
-      "actionDelete": "Delete"
-    },
-    "commentModal": {
+    }
+  },
+  "sptec-order-comments": {
+    "textCommentsTotal": "No comment | One comment | {total} comments",
+    "searchbarPlaceholder": "Search comments",
+    "addCommentBtn": "Add comment",
+    "modal": {
       "labelTitle": "Comment",
       "labelCreatedBy": "Created by",
       "labelCreatedAt": "Created at",
@@ -25,6 +18,15 @@
       "labelSave": "Save",
       "tabGeneral": "General",
       "tabMedia": "Media"
+    },
+    "item": {
+      "deleteWarning": "Are you sure you want to delete this comment?",
+      "labelCreatedBy": "Created by",
+      "labelCreatedAt": "Created at",
+      "labelUpdatedAt": "Updated at",
+      "labelInternal": "Internal",
+      "actionEdit": "Edit",
+      "actionDelete": "Delete"
     }
   }
 }

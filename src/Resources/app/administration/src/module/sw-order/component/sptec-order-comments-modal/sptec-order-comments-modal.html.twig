@@ -1,43 +1,43 @@
-{% block sw_order_comment_modal %}
+{% block sptec_order_comments_modal %}
     <sw-modal
-        class="sw-order-comment-modal"
-        :title="$tc('sw-order.commentModal.labelTitle')"
+        class="sptec-order-comments-modal"
+        :title="$tc('sptec-order-comments.modal.labelTitle')"
         :is-loading="isLoading"
         @modal-close="closeModal"
     >
-        {% block sw_order_comment_modal_tabs %}
+        {% block sptec_order_comments_modal_tabs %}
             <sw-tabs default-item="general">
                 <template #default="{ active }">
-                    {% block sw_order_comment_modal_tab_general %}
+                    {% block sptec_order_comments_modal_tab_general %}
                         <sw-tabs-item
                             :active-tab="active"
                             name="general"
                         >
-                            {{ $tc('sw-order.commentModal.tabGeneral') }}
+                            {{ $tc('sptec-order-comments.modal.tabGeneral') }}
                         </sw-tabs-item>
                     {% endblock %}
-                    {% block sw_order_comment_modal_tab_media %}
+                    {% block sptec_order_comments_modal_tab_media %}
                         <sw-tabs-item
                             :active-tab="active"
                             name="media"
                         >
-                            {{ $tc('sw-order.commentModal.tabMedia') }}
+                            {{ $tc('sptec-order-comments.modal.tabMedia') }}
                         </sw-tabs-item>
                     {% endblock %}
                 </template>
 
                 <template #content="{ active }">
-                    {% block sw_order_comment_modal_tab_general_content %}
+                    {% block sptec_order_comments_modal_tab_general_content %}
                         <template v-if="active === 'general'">
-                            {% block sw_order_comment_modal_info %}
+                            {% block sptec_order_comments_modal_info %}
                                 <sw-container
-                                    class="sw-order-comment-modal__info-container"
+                                    class="sptec-order-comments-modal__info-container"
                                     columns="1fr 1fr"
                                 >
                                     <sw-description-list
                                         grid="120px 1fr"
                                     >
-                                        <dt>{{ $tc('sw-order.commentModal.labelCreatedBy') }}</dt>
+                                        <dt>{{ $tc('sptec-order-comments.modal.labelCreatedBy') }}</dt>
                                         <dd>
                                             <sw-skeleton-bar
                                                 v-if="isLoading"
@@ -46,7 +46,7 @@
                                                 {{ userName }}
                                             </template>
                                         </dd>
-                                        <dt>{{ $tc('sw-order.commentModal.labelInternal') }}</dt>
+                                        <dt>{{ $tc('sptec-order-comments.modal.labelInternal') }}</dt>
                                         <dd>
                                             <sw-skeleton-bar
                                                 v-if="isLoading"
@@ -54,7 +54,7 @@
                                             <sw-switch-field
                                                 v-else
                                                 v-model="orderComment.internal"
-                                                :label="$tc('sw-order.commentModal.labelInternal')"
+                                                :label="$tc('sptec-order-comments.modal.labelInternal')"
                                             />
                                         </dd>
                                     </sw-description-list>
@@ -62,7 +62,7 @@
                                     <sw-description-list
                                         grid="120px 1fr"
                                     >
-                                        <dt>{{ $tc('sw-order.commentModal.labelCreatedAt') }}</dt>
+                                        <dt>{{ $tc('sptec-order-comments.modal.labelCreatedAt') }}</dt>
                                         <dd>
                                             <sw-skeleton-bar
                                                 v-if="isLoading"
@@ -71,7 +71,7 @@
                                                 {{ orderComment.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
                                             </template>
                                         </dd>
-                                        <dt>{{ $tc('sw-order.commentModal.labelUpdatedAt') }}</dt>
+                                        <dt>{{ $tc('sptec-order-comments.modal.labelUpdatedAt') }}</dt>
                                         <dd>
                                             <sw-skeleton-bar
                                                 v-if="isLoading"
@@ -84,7 +84,7 @@
                                 </sw-container>
                             {% endblock %}
 
-                            {% block sw_order_comment_modal_content %}
+                            {% block sptec_order_comments_modal_content %}
                                 <sw-skeleton-bar
                                     v-if="isLoading"
                                     style="height: 125px"
@@ -98,9 +98,9 @@
                             {% endblock %}
                         </template>
                     {% endblock %}
-                    {% block sw_order_comment_modal_tab_media_content %}
+                    {% block sptec_order_comments_modal_tab_media_content %}
                         <template v-if="active === 'media'">
-                            {% block sw_order_comment_modal_media_selection %}
+                            {% block sptec_order_comments_modal_media_selection %}
                                 <sw-upload-listener
                                     v-if="!isLoading"
                                     :upload-tag="orderComment.id"
@@ -120,7 +120,7 @@
 
                                 <div
                                     v-if="!isLoading"
-                                    class="sw-order-detail-order-comments__grid"
+                                    class="sptec-order-comments-item__grid"
                                     style="grid-template-columns: repeat(6, 1fr);"
                                 >
                                     <sptec-media-item
@@ -133,7 +133,7 @@
                                 </div>
                             {% endblock %}
 
-                            {% block sw_order_comment_modal_media_modal %}
+                            {% block sptec_order_comments_modal_media_modal %}
                                 <sw-media-modal-v2
                                     v-if="mediaModalIsOpen"
                                     variant="regular"
@@ -150,23 +150,23 @@
             </sw-tabs>
         {% endblock %}
 
-        {% block sw_order_comment_modal_footer %}
+        {% block sptec_order_comments_modal_footer %}
             <template #modal-footer>
-                {% block sw_order_comment_modal_secondary_action %}
+                {% block sptec_order_comments_modal_secondary_action %}
                     <sw-button
                         @click="closeModal"
                     >
-                        {{ $tc('sw-order.commentModal.labelClose') }}
+                        {{ $tc('sptec-order-comments.modal.labelClose') }}
                     </sw-button>
                 {% endblock %}
 
-                {% block sw_order_comment_modal_primary_action %}
+                {% block sptec_order_comments_modal_primary_action %}
                     <sw-button
                         :disabled="primaryActionDisabled"
                         variant="primary"
                         @click="saveComment"
                     >
-                        {{ $tc('sw-order.commentModal.labelSave') }}
+                        {{ $tc('sptec-order-comments.modal.labelSave') }}
                     </sw-button>
                 {% endblock %}
             </template>

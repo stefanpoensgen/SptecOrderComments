@@ -1,6 +1,12 @@
 @import "~scss/variables";
 
-.sw-order-detail-order-comments {
+.sptec-order-comments-item {
+    padding: 30px;
+
+    &:nth-child(even) {
+        background-color: $color-gray-100;
+    }
+
     .sw-card__content {
         padding: 0;
     }
@@ -27,14 +33,6 @@
             right: 4px;
             top: 4px;
         }
-    }
-
-    &__item {
-        padding: 30px;
-    }
-
-    &__item:nth-child(even) {
-        background-color: $color-gray-100;
     }
 
     &__grid {

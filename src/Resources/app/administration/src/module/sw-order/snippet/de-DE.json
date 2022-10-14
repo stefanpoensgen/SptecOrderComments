@@ -1,12 +1,14 @@
 {
   "sw-order": {
     "detail": {
-      "tabOrderComments": "Kommentare"
-    },
-    "commentCard": {
-      "textCommentsTotal": "Kein Kommentar | Ein Kommentar | {total} Kommentare",
-      "searchbarPlaceholder": "Kommentare durchsuchen",
-      "addCommentBtn": "Kommentar hinzufügen",
+      "tabOrderComments": "Comments"
+    }
+  },
+  "sptec-order-comments": {
+    "textCommentsTotal": "Kein Kommentar | Ein Kommentar | {total} Kommentare",
+    "searchbarPlaceholder": "Kommentare durchsuchen",
+    "addCommentBtn": "Kommentar hinzufügen",
+    "modal": {
       "deleteWarning": "Möchten Sie diesen Kommentar wirklich löschen?",
       "labelCreatedBy": "Erstellt von",
       "labelCreatedAt": "Erstellt am",
@@ -15,7 +17,7 @@
       "actionEdit": "Bearbeiten",
       "actionDelete": "Löschen"
     },
-    "commentModal": {
+    "item": {
       "labelTitle": "Kommentar",
       "labelCreatedBy": "Erstellt von",
       "labelCreatedAt": "Erstellt am",
@@ -28,3 +30,4 @@
     }
   }
 }
+

@@ -1,0 +1,94 @@
+{% block sptec_order_comments_item %}
+    <div class="sptec-order-comments-item">
+        {% block sptec_order_comments_item_container %}
+            <sw-container
+                slot="grid"
+                columns="350px auto"
+                gap="30px"
+            >
+                {% block sptec_order_comments_item_info %}
+                    <sw-description-list
+                        grid="120px 1fr"
+                    >
+                        <dt>{{ $tc('sptec-order-comments.item.labelCreatedAt') }}</dt>
+                        <dd>
+                            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </dd>
+                        <dt>{{ $tc('sptec-order-comments.item.labelUpdatedAt') }}</dt>
+                        <dd>
+                            {{ item.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                        </dd>
+                        <dt>{{ $tc('sptec-order-comments.item.labelCreatedBy') }}</dt>
+                        <dd>
+                            {{ item.createdBy.firstName }} {{ item.createdBy.lastName }}
+                        </dd>
+                        <dt>{{ $tc('sptec-order-comments.item.labelInternal') }}</dt>
+                        <dd>
+                            <sw-icon
+                                v-if="item.internal"
+                                name="regular-checkmark-xs"
+                                small
+                                color="#189eff"
+                            />
+                            <sw-icon
+                                v-else
+                                name="regular-times-s"
+                                small
+                                color="#e65100"
+                            />
+                        </dd>
+                    </sw-description-list>
+                {% endblock %}
+                {% block sptec_order_comments_item_content %}
+                    <div
+                        class="sptec-order-comments-item__content"
+                    >
+                        {% block sptec_order_comments_item_actions %}
+                            <sw-context-button>
+                                {% block sptec_order_comments_item_actions_edit %}
+                                    <sw-context-menu-item
+                                        @click="$emit('edit', item.id)"
+                                    >
+                                        {{ $tc('sptec-order-comments.item.actionEdit') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+
+                                {% block sptec_order_comments_item_actions_delete %}
+                                    <sw-context-menu-item
+                                        variant="danger"
+                                        @click="$emit('delete', item.id)"
+                                    >
+                                        {{ $tc('sptec-order-comments.item.actionDelete') }}
+                                    </sw-context-menu-item>
+                                {% endblock %}
+                            </sw-context-button>
+                        {% endblock %}
+                        <sw-block-field
+                            class="sw-field--textarea"
+                        >
+                            <template #sw-field-input>
+                                        <textarea
+                                            :value="item.content"
+                                            readonly
+                                        />
+                            </template>
+                        </sw-block-field>
+                    </div>
+                {% endblock %}
+            </sw-container>
+        {% endblock %}
+        {% block sptec_order_comments_item_grid %}
+            <div
+                v-if="item.media.length > 0"
+                class="sptec-order-comments-item__grid"
+            >
+                <sptec-media-item
+                    v-for="(mediaItem, index) in item.media"
+                    :key="index"
+                    :item="mediaItem"
+                    @click="openMediaModal(mediaItem)"
+                />
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}

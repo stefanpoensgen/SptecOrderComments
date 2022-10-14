@@ -1,5 +1,5 @@
-import template from './sw-order-detail-comments.html.twig';
-import './sw-order-detail-comments.scss';
+import template from './sptec-order-comments.html.twig';
+import './sptec-order-comments.scss';
 
 const { Component, Context, Mixin } = Shopware;
 const Criteria = Shopware.Data.Criteria;
@@ -7,7 +7,7 @@ const Criteria = Shopware.Data.Criteria;
 /**
  * @private
  */
-Component.register('sw-order-detail-comments', {
+Component.register('sptec-order-comments', {
     template,
 
     inject: [
@@ -26,6 +26,7 @@ Component.register('sw-order-detail-comments', {
             deleteOrderCommentId: null,
             isLoading: true,
             orderComments: [],
+            total: 0,
             limit: 10,
             sortBy: 'createdAt',
             sortDirection: 'DESC',

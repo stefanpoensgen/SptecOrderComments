@@ -1,5 +1,5 @@
-import template from './sw-order-comment-modal.html.twig';
-import './sw-order-comment-modal.scss';
+import template from './sptec-order-comments-modal.html.twig';
+import './sptec-order-comments-modal.scss';
 
 const { Component, Context, Utils } = Shopware;
 const { mapPropertyErrors } = Component.getComponentHelper();
@@ -9,7 +9,7 @@ const { isEmpty } = Utils.types;
 /**
  * @private
  */
-Component.register('sw-order-comment-modal', {
+Component.register('sptec-order-comments-modal', {
     template,
 
     inject: [
