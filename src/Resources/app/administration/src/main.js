@@ -1,6 +1,8 @@
+import './app/component/filter/sw-boolean-filter';
 import './app/component/media/sw-media-folder-item';
 import './app/component/sptec-media-item';
 import './module/sw-order/page/sw-order-detail';
+import './module/sw-order/page/sw-order-list';
 import './module/sw-order/view/sptec-order-comments';
 import './module/sw-order/component/sptec-order-comments-modal';
 import './module/sw-order/component/sptec-order-comments-item';

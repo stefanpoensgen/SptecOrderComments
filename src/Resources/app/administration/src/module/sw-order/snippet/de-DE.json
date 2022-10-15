@@ -32,6 +32,16 @@
       "labelTask": "Task",
       "actionEdit": "Bearbeiten",
       "actionDelete": "Löschen"
+    },
+    "filter": {
+      "commentFilterLabel": "Kommentare",
+      "commentFilterPlaceholder": "Kommentarstatus auswählen ...",
+      "orderHasComment": "Bestellung hat Kommentare",
+      "orderNoComment": "Bestellung hat keine Kommentare",
+      "taskFilterLabel": "Kommentare mit Tasks",
+      "taskFilterPlaceholder": "Taskstatus auswählen ...",
+      "commentHasTask": "Kommentar hat Tasks",
+      "commentTaskDone": "Kommentar hat erledigte Tasks"
     }
   }
 }
