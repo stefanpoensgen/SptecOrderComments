@@ -9,6 +9,8 @@ Features
 - External comments are displayed for the user on the order
 - Adds flow builder trigger for comment created and updated
 - Media can be saved to comments
+- Comments could be flagged if there is a task related to it
+- Filter orders by comment/task status
 
 Requirements
 -----
