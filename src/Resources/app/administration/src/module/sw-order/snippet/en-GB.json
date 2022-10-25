@@ -1,10 +1,6 @@
 {
-  "sw-order": {
-    "detail": {
-      "tabOrderComments": "Comments"
-    }
-  },
   "sptec-order-comments": {
+    "tabOrderComments": "Comments",
     "textCommentsTotal": "No comment | One comment | {total} comments",
     "searchbarPlaceholder": "Search comments",
     "addCommentBtn": "Add comment",
