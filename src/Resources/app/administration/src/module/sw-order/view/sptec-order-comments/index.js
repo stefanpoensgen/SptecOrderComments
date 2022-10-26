@@ -35,7 +35,7 @@ Component.register('sptec-order-comments', {
 
     metaInfo() {
         return {
-            title: this.$createTitle(this.identifier, this.$tc('sw-order.detail.tabOrderComments')),
+            title: this.$createTitle(this.identifier, this.$tc('sptec-order-comments.tabOrderComments')),
         };
     },
 
