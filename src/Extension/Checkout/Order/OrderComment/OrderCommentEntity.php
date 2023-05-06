@@ -15,11 +15,11 @@ class OrderCommentEntity extends Entity
 
     protected string $orderId;
 
-    protected ?OrderEntity $order;
+    protected ?OrderEntity $order = null;
 
     protected string $createdById;
 
-    protected ?UserEntity $createdBy;
+    protected ?UserEntity $createdBy = null;
 
     protected string $content;
 

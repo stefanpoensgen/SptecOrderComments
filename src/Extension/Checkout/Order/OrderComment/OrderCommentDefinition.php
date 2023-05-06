@@ -24,7 +24,9 @@ use Shopware\Core\System\User\UserDefinition;
 
 class OrderCommentDefinition extends EntityDefinition
 {
-    public const ENTITY_NAME = 'sptec_order_comment';
+    final public const ENTITY_NAME = 'sptec_order_comment';
+
+    final public const EXTENSION_NAME = 'sptecOrderComments';
 
     public function getEntityName(): string
     {

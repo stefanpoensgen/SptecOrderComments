@@ -1,4 +1,5 @@
-<?php declare(strict_types=1);
+<?php
+declare(strict_types=1);
 
 namespace SptecOrderComments\Test;
 
@@ -22,7 +23,7 @@ class OrderCommentTest extends TestCase
 
     private EntityRepository $userRepository;
 
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->orderRepository = $this->getContainer()->get('order.repository');
         $this->orderCommentRepository = $this->getContainer()->get('sptec_order_comment.repository');

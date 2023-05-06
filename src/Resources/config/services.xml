@@ -15,6 +15,14 @@
             <tag name="shopware.entity.extension"/>
         </service>
 
+        <service id="SptecOrderComments\Extension\Content\Media\MediaExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
+        <service id="SptecOrderComments\Extension\System\User\UserExtension">
+            <tag name="shopware.entity.extension"/>
+        </service>
+
         <service id="SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentMediaDefinition">
             <tag name="shopware.composite_search.definition"/>
             <tag name="shopware.entity.definition"/>

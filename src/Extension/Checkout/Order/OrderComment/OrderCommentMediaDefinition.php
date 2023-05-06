@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SptecOrderComments\Extension\Checkout\Order\OrderComment;
 
@@ -16,7 +18,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
 class OrderCommentMediaDefinition extends EntityDefinition
 {
-    public const ENTITY_NAME = 'sptec_order_comment_media';
+    final public const ENTITY_NAME = 'sptec_order_comment_media';
 
     public function getEntityName(): string
     {
@@ -49,7 +51,7 @@ class OrderCommentMediaDefinition extends EntityDefinition
 
             (new FkField('media_id', 'mediaId', MediaDefinition::class))->addFlags(new ApiAware(), new Required()),
 
-            (new ManyToOneAssociationField('orderComment', 'order_comment_id', OrderCommentDefinition::class, 'id', false)),
+            new ManyToOneAssociationField('orderComment', 'order_comment_id', OrderCommentDefinition::class, 'id', false),
             (new ManyToOneAssociationField('media', 'media_id', MediaDefinition::class, 'id', true))->addFlags(new ApiAware()),
         ]);
     }

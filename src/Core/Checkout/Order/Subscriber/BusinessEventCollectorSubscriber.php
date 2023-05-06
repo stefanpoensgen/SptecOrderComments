@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SptecOrderComments\Core\Checkout\Order\Subscriber;
 
@@ -11,11 +13,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class BusinessEventCollectorSubscriber implements EventSubscriberInterface
 {
-    private BusinessEventCollector $businessEventCollector;
-
-    public function __construct(BusinessEventCollector $businessEventCollector)
+    public function __construct(private readonly BusinessEventCollector $businessEventCollector)
     {
-        $this->businessEventCollector = $businessEventCollector;
     }
 
     public static function getSubscribedEvents(): array

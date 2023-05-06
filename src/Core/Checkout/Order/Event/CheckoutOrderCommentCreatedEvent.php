@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SptecOrderComments\Core\Checkout\Order\Event;
 
+use Shopware\Core\Checkout\Order\Aggregate\OrderCustomer\OrderCustomerEntity;
 use Shopware\Core\Checkout\Order\OrderDefinition;
 use Shopware\Core\Checkout\Order\OrderEntity;
 use Shopware\Core\Content\Flow\Exception\CustomerDeletedException;
@@ -22,17 +25,11 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
 {
     public const EVENT_NAME = 'checkout.order.comment.created';
 
-    private OrderEntity $order;
-
-    private OrderCommentEntity $orderComment;
-
-    private Context $context;
-
-    public function __construct(OrderEntity $order, OrderCommentEntity $orderComment, Context $context)
-    {
-        $this->order = $order;
-        $this->orderComment = $orderComment;
-        $this->context = $context;
+    public function __construct(
+        private readonly OrderEntity $order,
+        private readonly OrderCommentEntity $orderComment,
+        private readonly Context $context
+    ) {
     }
 
     public function getName(): string
@@ -59,7 +56,7 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
 
     public function getMailStruct(): MailRecipientStruct
     {
-        if ($this->order->getOrderCustomer() === null) {
+        if (!$this->order->getOrderCustomer() instanceof OrderCustomerEntity) {
             throw new MailEventConfigurationException('Data for mailRecipientStruct not available.', self::class);
         }
 
@@ -87,7 +84,7 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
     {
         $customer = $this->getOrder()->getOrderCustomer();
 
-        if ($customer === null || $customer->getCustomerId() === null) {
+        if (!$customer instanceof OrderCustomerEntity || $customer->getCustomerId() === null) {
             throw new CustomerDeletedException($this->getOrderId());
         }
 

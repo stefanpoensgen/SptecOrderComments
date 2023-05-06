@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SptecOrderComments\Extension\Checkout\Order\OrderComment;
 
@@ -14,9 +16,9 @@ class OrderCommentMediaEntity extends Entity
 
     protected string $mediaId;
 
-    protected ?MediaEntity $media;
+    protected ?MediaEntity $media = null;
 
-    protected ?OrderCommentEntity $orderComment;
+    protected ?OrderCommentEntity $orderComment = null;
 
     public function getOrderCommentId(): string
     {

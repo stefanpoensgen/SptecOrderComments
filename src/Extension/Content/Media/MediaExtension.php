@@ -2,31 +2,30 @@
 
 declare(strict_types=1);
 
-namespace SptecOrderComments\Extension\Checkout\Order\OrderComment;
+namespace SptecOrderComments\Extension\Content\Media;
 
-use Shopware\Core\Checkout\Order\OrderDefinition;
+use Shopware\Core\Content\Media\MediaDefinition;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityExtension;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\ApiAware;
-use Shopware\Core\Framework\DataAbstractionLayer\Field\Flag\CascadeDelete;
 use Shopware\Core\Framework\DataAbstractionLayer\Field\OneToManyAssociationField;
 use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
+use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinition;
+use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentMediaDefinition;
 
-class OrderCommentExtension extends EntityExtension
+class MediaExtension extends EntityExtension
 {
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
-            (
             new OneToManyAssociationField(
                 OrderCommentDefinition::EXTENSION_NAME,
-                OrderCommentDefinition::class,
-                'order_id'
-            ))->addFlags(new ApiAware(), new CascadeDelete()),
+                OrderCommentMediaDefinition::class,
+                'media_id'
+            )
         );
     }
 
     public function getDefinitionClass(): string
     {
-        return OrderDefinition::class;
+        return MediaDefinition::class;
     }
 }

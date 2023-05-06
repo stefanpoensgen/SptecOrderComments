@@ -1,7 +1,10 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace SptecOrderComments\Subscriber;
 
+use Shopware\Core\Checkout\Order\OrderEntity;
 use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
@@ -18,19 +21,13 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 class OrderCommentSubscriber implements EventSubscriberInterface
 {
-    private EventDispatcherInterface $eventDispatcher;
-
-    private EntityRepository $orderCommentRepository;
-
     public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        EntityRepository $orderCommentRepository
+        private readonly EventDispatcherInterface $eventDispatcher,
+        private readonly EntityRepository $orderCommentRepository
     ) {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->orderCommentRepository = $orderCommentRepository;
     }
 
-    public static function getSubscribedEvents()
+    public static function getSubscribedEvents(): array
     {
         return [
             'sptec_order_comment.written' => 'onOrderCommentWritten',
@@ -40,7 +37,7 @@ class OrderCommentSubscriber implements EventSubscriberInterface
     public function onOrderCommentWritten(EntityWrittenEvent $event): void
     {
         $context = $event->getContext();
-        if ($event->hasErrors() === true || $context->getVersionId() !== Defaults::LIVE_VERSION) {
+        if ($event->hasErrors() || $context->getVersionId() !== Defaults::LIVE_VERSION) {
             return;
         }
 
@@ -58,7 +55,7 @@ class OrderCommentSubscriber implements EventSubscriberInterface
             }
 
             $order = $orderComment->getOrder();
-            if ($order === null) {
+            if (!$order instanceof OrderEntity) {
                 continue;
             }
 
