@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace SptecOrderComments\Migration;
 
 use Doctrine\DBAL\Connection;
-use Shopware\Core\Defaults;
 use Shopware\Core\Framework\Migration\MigrationStep;
 
 class Migration1683477576 extends MigrationStep
