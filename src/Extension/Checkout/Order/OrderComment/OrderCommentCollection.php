@@ -11,7 +11,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\EntityCollection;
  */
 class OrderCommentCollection extends EntityCollection
 {
-    public function getExpectedClass(): string
+    protected function getExpectedClass(): string
     {
         return OrderCommentEntity::class;
     }
