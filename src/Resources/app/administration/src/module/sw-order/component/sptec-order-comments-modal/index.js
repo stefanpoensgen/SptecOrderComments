@@ -1,10 +1,10 @@
 import template from './sptec-order-comments-modal.html.twig';
 import './sptec-order-comments-modal.scss';
 
-const { Component, Context, Utils } = Shopware;
-const { mapPropertyErrors } = Component.getComponentHelper();
+const {Component, Context, Utils} = Shopware;
+const {mapPropertyErrors} = Component.getComponentHelper();
 const Criteria = Shopware.Data.Criteria;
-const { isEmpty } = Utils.types;
+const {isEmpty} = Utils.types;
 
 /**
  * @private
@@ -33,6 +33,7 @@ Component.register('sptec-order-comments-modal', {
             isLoading: true,
             orderComment: undefined,
             mediaModalIsOpen: false,
+            mediaDefaultFolderId: null,
             taskOptions: [
                 {
                     value: null,
@@ -102,6 +103,23 @@ Component.register('sptec-order-comments-modal', {
 
             return 'gray';
         },
+
+        dateFilter() {
+            return Shopware.Filter.getByName('date');
+        },
+
+        mediaDefaultFolderRepository() {
+            return this.repositoryFactory.create('media_default_folder');
+        },
+
+        mediaDefaultFolderCriteria() {
+            const criteria = new Criteria(1, 1);
+
+            criteria.addAssociation('folder');
+            criteria.addFilter(Criteria.equals('entity', 'sptec_order_comment'));
+
+            return criteria;
+        },
     },
 
     created() {
@@ -110,6 +128,11 @@ Component.register('sptec-order-comments-modal', {
 
     methods: {
         createdComponent() {
+            this.getMediaDefaultFolderId().then((mediaDefaultFolderId) => {
+                this.mediaDefaultFolderId = mediaDefaultFolderId;
+            });
+
+
             if (this.orderCommentId) {
                 this.getOrderComment();
                 return;
@@ -159,7 +182,7 @@ Component.register('sptec-order-comments-modal', {
             this.mediaModalIsOpen = false;
         },
 
-        onImageUpload({ targetId }) {
+        onImageUpload({targetId}) {
             if (this.orderComment.media.find((mediaItem) => mediaItem.mediaId === targetId)) {
                 return;
             }
@@ -172,7 +195,7 @@ Component.register('sptec-order-comments-modal', {
             this.orderComment.media.remove(mediaItem.id);
         },
 
-        onUploadFailed({ targetId }) {
+        onUploadFailed({targetId}) {
             const toRemove = this.orderComment.media.find((mediaItem) => {
                 return mediaItem.mediaId === targetId;
             });
@@ -195,9 +218,22 @@ Component.register('sptec-order-comments-modal', {
         },
 
         isExistingMedia(mediaItem) {
-            return this.orderComment.media.some(({ id, mediaId }) => {
+            return this.orderComment.media.some(({id, mediaId}) => {
                 return id === mediaItem.id || mediaId === mediaItem.id;
             });
+        },
+
+        getMediaDefaultFolderId() {
+            return this.mediaDefaultFolderRepository.search(this.mediaDefaultFolderCriteria, Context.api)
+                .then((mediaDefaultFolder) => {
+                    const defaultFolder = mediaDefaultFolder.first();
+
+                    if (defaultFolder.folder?.id) {
+                        return defaultFolder.folder.id;
+                    }
+
+                    return null;
+                });
         },
     },
 });

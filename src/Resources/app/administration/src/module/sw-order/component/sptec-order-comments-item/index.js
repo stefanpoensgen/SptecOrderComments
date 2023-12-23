@@ -15,4 +15,10 @@ Component.register('sptec-order-comments-item', {
             required: true,
         },
     },
+
+    computed: {
+        dateFilter() {
+            return Shopware.Filter.getByName('date');
+        },
+    },
 });

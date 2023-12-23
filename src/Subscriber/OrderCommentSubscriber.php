@@ -24,8 +24,7 @@ class OrderCommentSubscriber implements EventSubscriberInterface
     public function __construct(
         private readonly EventDispatcherInterface $eventDispatcher,
         private readonly EntityRepository $orderCommentRepository
-    ) {
-    }
+    ) {}
 
     public static function getSubscribedEvents(): array
     {

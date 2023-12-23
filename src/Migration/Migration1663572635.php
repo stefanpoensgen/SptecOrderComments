@@ -37,7 +37,5 @@ class Migration1663572635 extends MigrationStep
         $connection->executeStatement($query);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    public function updateDestructive(Connection $connection): void {}
 }

@@ -19,7 +19,5 @@ class Migration1665773845 extends MigrationStep
         $connection->executeStatement('ALTER TABLE `sptec_order_comment` ADD `task` TINYINT(1) NULL DEFAULT NULL;');
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    public function updateDestructive(Connection $connection): void {}
 }
