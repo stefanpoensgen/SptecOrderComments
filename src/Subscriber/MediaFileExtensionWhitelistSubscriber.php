@@ -10,9 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class MediaFileExtensionWhitelistSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly SystemConfigService $systemConfigService)
-    {
-    }
+    public function __construct(private readonly SystemConfigService $systemConfigService) {}
 
     public static function getSubscribedEvents(): array
     {

@@ -16,8 +16,12 @@ class Migration1683477576 extends MigrationStep
 
     public function update(Connection $connection): void
     {
+        if (!$this->columnExists($connection, 'media_default_folder', 'association_fields')) {
+            return;
+        }
+
         $query = <<<SQL
-            UPDATE `media_default_folder` SET `association_fields` = :associationFields WHERE `entity` = :entity;
+                UPDATE `media_default_folder` SET `association_fields` = :associationFields WHERE `entity` = :entity;
             SQL;
 
         $connection->executeStatement($query, [
@@ -26,7 +30,5 @@ class Migration1683477576 extends MigrationStep
         ]);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    public function updateDestructive(Connection $connection): void {}
 }

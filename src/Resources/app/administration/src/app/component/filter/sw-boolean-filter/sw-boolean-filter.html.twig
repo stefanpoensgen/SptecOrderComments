@@ -1,13 +1,13 @@
 {% block sw_boolean_filter_content %}
     <sw-select-field
-        :value="value"
+        v-model:value="value"
         :placeholder="filter.placeholder"
-        @change="changeValue"
+        @update:value="changeValue"
     >
-        <option :value="true">
+        <option v-model:value="true">
             {{ filter.optionHasCriteria ? filter.optionHasCriteria : $tc('sw-boolean-filter.active') }}
         </option>
-        <option :value="false">
+        <option v-model:value="false">
             {{ filter.optionNoCriteria ? filter.optionNoCriteria : $tc('sw-boolean-filter.inactive') }}
         </option>
     </sw-select-field>

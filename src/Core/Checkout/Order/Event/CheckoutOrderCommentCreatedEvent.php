@@ -23,14 +23,13 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAware, OrderAware, MailAware, CustomerAware
 {
-    public const EVENT_NAME = 'checkout.order.comment.created';
+    final public const EVENT_NAME = 'checkout.order.comment.created';
 
     public function __construct(
         private readonly OrderEntity $order,
         private readonly OrderCommentEntity $orderComment,
         private readonly Context $context
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {

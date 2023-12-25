@@ -26,16 +26,21 @@ class Migration1663665465 extends MigrationStep
         $this->addMediaFolder($connection, $defaultFolderId, $configurationId);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    public function updateDestructive(Connection $connection): void {}
 
     private function addMediaDefaultFolder(Connection $connection, string $defaultFolderId): void
     {
-        $query = <<<SQL
-            INSERT IGNORE INTO `media_default_folder` (`id`, `association_fields`, `entity`, `created_at`)
-            VALUES (:id, '["sptecOrderComment"]', 'sptec_order_comment', :createdAt);
-            SQL;
+        if ($this->columnExists($connection, 'media_default_folder', 'association_fields')) {
+            $query = <<<SQL
+                    INSERT IGNORE INTO `media_default_folder` (`id`, `association_fields`, `entity`, `created_at`)
+                    VALUES (:id, '["sptecOrderComment"]', 'sptec_order_comment', :createdAt);
+                SQL;
+        } else {
+            $query = <<<SQL
+                    INSERT IGNORE INTO `media_default_folder` (`id`, `entity`, `created_at`)
+                    VALUES (:id, 'sptec_order_comment', :createdAt);
+                SQL;
+        }
 
         $connection->executeStatement($query, [
             'id' => $defaultFolderId,
