@@ -1,9 +1,6 @@
 import template from './sptec-media-item.html.twig';
 import './sptec-media-item.scss';
 
-/**
- * @private
- */
 Shopware.Component.register('sptec-media-item', {
     template,
 

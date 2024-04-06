@@ -5,48 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-
-        <service id="SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinition">
-            <tag name="shopware.composite_search.definition"/>
-            <tag name="shopware.entity.definition"/>
-        </service>
-
-        <service id="SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentExtension">
-            <tag name="shopware.entity.extension"/>
-        </service>
-
-        <service id="SptecOrderComments\Extension\Content\Media\MediaExtension">
-            <tag name="shopware.entity.extension"/>
-        </service>
-
-        <service id="SptecOrderComments\Extension\System\User\UserExtension">
-            <tag name="shopware.entity.extension"/>
-        </service>
-
-        <service id="SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentMediaDefinition">
-            <tag name="shopware.composite_search.definition"/>
-            <tag name="shopware.entity.definition"/>
-        </service>
-
-        <service id="SptecOrderComments\Subscriber\OrderRouteRequestSubscriber">
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="SptecOrderComments\Core\Checkout\Order\Subscriber\BusinessEventCollectorSubscriber">
-            <argument type="service" id="Shopware\Core\Framework\Event\BusinessEventCollector"/>
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="SptecOrderComments\Subscriber\OrderCommentSubscriber">
-            <argument type="service" id="event_dispatcher"/>
-            <argument type="service" id="sptec_order_comment.repository"/>
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
-        <service id="SptecOrderComments\Subscriber\MediaFileExtensionWhitelistSubscriber">
-            <argument id="Shopware\Core\System\SystemConfig\SystemConfigService" type="service"/>
-            <tag name="kernel.event_subscriber"/>
-        </service>
-
+        <defaults autowire="true" autoconfigure="true"/>
+        <prototype namespace="SptecOrderComments\" resource="../../" exclude="../../{DependencyInjection,Resources,Migration,MbCore.php}" />
     </services>
 </container>

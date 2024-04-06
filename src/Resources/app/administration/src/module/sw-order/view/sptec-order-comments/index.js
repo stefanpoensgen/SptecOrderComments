@@ -4,9 +4,6 @@ import './sptec-order-comments.scss';
 const { Component, Context, Mixin } = Shopware;
 const Criteria = Shopware.Data.Criteria;
 
-/**
- * @private
- */
 Component.register('sptec-order-comments', {
     template,
 

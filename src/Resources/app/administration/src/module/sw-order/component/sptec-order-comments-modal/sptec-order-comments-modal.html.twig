@@ -53,7 +53,7 @@
                                             />
                                             <sw-switch-field
                                                 v-else
-                                                v-model="orderComment.internal"
+                                                v-model:value="orderComment.internal"
                                                 :label="$tc('sptec-order-comments.modal.labelInternal')"
                                             />
                                         </dd>
@@ -64,7 +64,7 @@
                                             />
                                             <sw-single-select
                                                 v-else
-                                                v-model="orderComment.task"
+                                                v-model:value="orderComment.task"
                                                 :class="taskOptionClass"
                                                 :options="taskOptions"
                                                 disableSearchFunction
@@ -82,7 +82,7 @@
                                                 v-if="isLoading"
                                             />
                                             <template v-else>
-                                                {{ orderComment.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                                {{ date(orderComment.createdAt, {hour: '2-digit', minute: '2-digit'}) }}
                                             </template>
                                         </dd>
                                         <dt>{{ $tc('sptec-order-comments.modal.labelUpdatedAt') }}</dt>
@@ -91,7 +91,7 @@
                                                 v-if="isLoading"
                                             />
                                             <template v-else>
-                                                {{ orderComment.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                                                {{ date(orderComment.updatedAt, {hour: '2-digit', minute: '2-digit'}) }}
                                             </template>
                                         </dd>
                                     </sw-description-list>
@@ -105,7 +105,7 @@
                                 />
                                 <sw-textarea-field
                                     v-else
-                                    v-model="orderComment.content"
+                                    v-model:value="orderComment.content"
                                     required
                                     :error="orderCommentContentError"
                                 />
@@ -150,9 +150,8 @@
                             {% block sptec_order_comments_modal_media_modal %}
                                 <sw-media-modal-v2
                                     v-if="mediaModalIsOpen"
-                                    variant="regular"
                                     :caption="$tc('sw-cms.elements.general.config.caption.mediaUpload')"
-                                    entity-context="orderComment.getEntityName()"
+                                    :entity-context="orderComment.getEntityName()"
                                     @media-upload-remove-image="onItemRemove"
                                     @media-modal-selection-change="onMediaSelectionChange"
                                     @modal-close="onCloseMediaModal"

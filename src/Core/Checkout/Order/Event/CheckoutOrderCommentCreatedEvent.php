@@ -29,8 +29,7 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
         private readonly OrderEntity $order,
         private readonly OrderCommentEntity $orderComment,
         private readonly Context $context
-    ) {
-    }
+    ) {}
 
     public function getName(): string
     {
@@ -54,6 +53,7 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
             ->add('orderComment', new EntityType(OrderCommentDefinition::class));
     }
 
+    #[\Override]
     public function getMailStruct(): MailRecipientStruct
     {
         if (!$this->order->getOrderCustomer() instanceof OrderCustomerEntity) {
@@ -65,6 +65,7 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
         ]);
     }
 
+    #[\Override]
     public function getSalesChannelId(): string
     {
         return $this->order->getSalesChannelId();
@@ -75,11 +76,13 @@ class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAwar
         return $this->context;
     }
 
+    #[\Override]
     public function getOrderId(): string
     {
         return $this->getOrder()->getId();
     }
 
+    #[\Override]
     public function getCustomerId(): string
     {
         $customer = $this->getOrder()->getOrderCustomer();

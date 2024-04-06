@@ -3,9 +3,6 @@ import './sptec-order-comments-item.scss';
 
 const { Component } = Shopware;
 
-/**
- * @private
- */
 Component.register('sptec-order-comments-item', {
     template,
 
@@ -15,4 +12,10 @@ Component.register('sptec-order-comments-item', {
             required: true,
         },
     },
+
+    computed: {
+        date() {
+            return Shopware.Filter.getByName('date');
+        },
+    }
 });

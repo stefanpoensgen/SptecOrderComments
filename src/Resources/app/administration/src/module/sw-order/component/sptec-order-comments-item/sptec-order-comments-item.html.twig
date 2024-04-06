@@ -12,11 +12,11 @@
                     >
                         <dt>{{ $tc('sptec-order-comments.item.labelCreatedAt') }}</dt>
                         <dd>
-                            {{ item.createdAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                            {{ date(item.createdAt, {hour: '2-digit', minute: '2-digit'}) }}
                         </dd>
                         <dt>{{ $tc('sptec-order-comments.item.labelUpdatedAt') }}</dt>
                         <dd>
-                            {{ item.updatedAt | date({hour: '2-digit', minute: '2-digit'}) }}
+                            {{ date(item.updatedAt, {hour: '2-digit', minute: '2-digit'}) }}
                         </dd>
                         <dt>{{ $tc('sptec-order-comments.item.labelCreatedBy') }}</dt>
                         <dd>

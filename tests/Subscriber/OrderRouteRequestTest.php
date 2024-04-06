@@ -18,16 +18,11 @@ class OrderRouteRequestTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    /**
-     * @var OrderRouteRequestSubscriber
-     */
-    private $orderRouteRequestSubscriber;
+    private OrderRouteRequestSubscriber $orderRouteRequestSubscriber;
 
-    /**
-     * @var SalesChannelContextFactory
-     */
-    private $salesChannelContextFactory;
+    private SalesChannelContextFactory $salesChannelContextFactory;
 
+    #[\Override]
     protected function setUp(): void
     {
         $container = $this->getContainer();
@@ -43,7 +38,7 @@ class OrderRouteRequestTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
-        static::assertSame(
+        self::assertSame(
             [
                 OrderRouteRequestEvent::class => 'onOrderRouteRequest',
             ],
@@ -60,9 +55,9 @@ class OrderRouteRequestTest extends TestCase
 
         $criteria = $event->getCriteria();
         $associations = $criteria->getAssociations();
-        static::assertArrayHasKey('sptecOrderComments', $associations);
+        self::assertArrayHasKey('sptecOrderComments', $associations);
 
         $sptecOrderCommentsAssociation = $associations['sptecOrderComments'];
-        static::assertInstanceOf(Criteria::class, $sptecOrderCommentsAssociation);
+        self::assertInstanceOf(Criteria::class, $sptecOrderCommentsAssociation);
     }
 }

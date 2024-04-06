@@ -13,6 +13,7 @@ use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentMediaDe
 
 class MediaExtension extends EntityExtension
 {
+    #[\Override]
     public function extendFields(FieldCollection $collection): void
     {
         $collection->add(
@@ -24,6 +25,7 @@ class MediaExtension extends EntityExtension
         );
     }
 
+    #[\Override]
     public function getDefinitionClass(): string
     {
         return MediaDefinition::class;

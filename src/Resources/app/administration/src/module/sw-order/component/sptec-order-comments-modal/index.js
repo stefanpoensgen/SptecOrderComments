@@ -6,9 +6,6 @@ const { mapPropertyErrors } = Component.getComponentHelper();
 const Criteria = Shopware.Data.Criteria;
 const { isEmpty } = Utils.types;
 
-/**
- * @private
- */
 Component.register('sptec-order-comments-modal', {
     template,
 
@@ -101,6 +98,10 @@ Component.register('sptec-order-comments-modal', {
             }
 
             return 'gray';
+        },
+
+        date() {
+            return Shopware.Filter.getByName('date');
         },
     },
 

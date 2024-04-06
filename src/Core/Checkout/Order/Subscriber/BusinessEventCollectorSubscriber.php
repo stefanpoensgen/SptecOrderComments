@@ -11,12 +11,11 @@ use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentCreatedEven
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentUpdatedEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class BusinessEventCollectorSubscriber implements EventSubscriberInterface
+readonly class BusinessEventCollectorSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly BusinessEventCollector $businessEventCollector)
-    {
-    }
+    public function __construct(private BusinessEventCollector $businessEventCollector) {}
 
+    #[\Override]
     public static function getSubscribedEvents(): array
     {
         return [
