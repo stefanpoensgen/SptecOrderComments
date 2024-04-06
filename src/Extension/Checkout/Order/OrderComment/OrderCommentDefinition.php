@@ -24,25 +24,29 @@ use Shopware\Core\System\User\UserDefinition;
 
 class OrderCommentDefinition extends EntityDefinition
 {
-    final public const ENTITY_NAME = 'sptec_order_comment';
+    final public const string ENTITY_NAME = 'sptec_order_comment';
 
-    final public const EXTENSION_NAME = 'sptecOrderComments';
+    final public const string EXTENSION_NAME = 'sptecOrderComments';
 
+    #[\Override]
     public function getEntityName(): string
     {
         return self::ENTITY_NAME;
     }
 
+    #[\Override]
     public function getEntityClass(): string
     {
         return OrderCommentEntity::class;
     }
 
+    #[\Override]
     public function getCollectionClass(): string
     {
         return OrderCommentCollection::class;
     }
 
+    #[\Override]
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([

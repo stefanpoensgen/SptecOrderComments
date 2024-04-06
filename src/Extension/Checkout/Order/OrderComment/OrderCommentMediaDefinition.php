@@ -18,28 +18,33 @@ use Shopware\Core\Framework\DataAbstractionLayer\FieldCollection;
 
 class OrderCommentMediaDefinition extends EntityDefinition
 {
-    final public const ENTITY_NAME = 'sptec_order_comment_media';
+    final public const string ENTITY_NAME = 'sptec_order_comment_media';
 
+    #[\Override]
     public function getEntityName(): string
     {
         return self::ENTITY_NAME;
     }
 
+    #[\Override]
     public function getCollectionClass(): string
     {
         return OrderCommentMediaCollection::class;
     }
 
+    #[\Override]
     public function getEntityClass(): string
     {
         return OrderCommentMediaEntity::class;
     }
 
+    #[\Override]
     protected function getParentDefinitionClass(): ?string
     {
         return OrderCommentDefinition::class;
     }
 
+    #[\Override]
     protected function defineFields(): FieldCollection
     {
         return new FieldCollection([

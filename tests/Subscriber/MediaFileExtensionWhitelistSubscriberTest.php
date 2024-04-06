@@ -24,6 +24,7 @@ class MediaFileExtensionWhitelistSubscriberTest extends TestCase
      */
     private $systemConfigService;
 
+    #[\Override]
     protected function setUp(): void
     {
         $container = $this->getContainer();
@@ -39,7 +40,7 @@ class MediaFileExtensionWhitelistSubscriberTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
-        static::assertSame(
+        self::assertSame(
             [
                 MediaFileExtensionWhitelistEvent::class => 'addEntriesToFileExtensionWhitelist',
             ],
@@ -54,7 +55,7 @@ class MediaFileExtensionWhitelistSubscriberTest extends TestCase
 
         $this->mediaFileExtensionWhitelistSubscriber->addEntriesToFileExtensionWhitelist($event);
 
-        static::assertContains('docx', $event->getWhitelist());
-        static::assertContains('xlsx', $event->getWhitelist());
+        self::assertContains('docx', $event->getWhitelist());
+        self::assertContains('xlsx', $event->getWhitelist());
     }
 }

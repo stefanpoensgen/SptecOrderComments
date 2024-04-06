@@ -11,11 +11,13 @@ use Shopware\Core\Framework\Uuid\Uuid;
 
 class Migration1663665465 extends MigrationStep
 {
+    #[\Override]
     public function getCreationTimestamp(): int
     {
         return 1663665465;
     }
 
+    #[\Override]
     public function update(Connection $connection): void
     {
         $defaultFolderId = Uuid::randomBytes();
@@ -26,15 +28,14 @@ class Migration1663665465 extends MigrationStep
         $this->addMediaFolder($connection, $defaultFolderId, $configurationId);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    #[\Override]
+    public function updateDestructive(Connection $connection): void {}
 
     private function addMediaDefaultFolder(Connection $connection, string $defaultFolderId): void
     {
         $query = <<<SQL
-            INSERT IGNORE INTO `media_default_folder` (`id`, `association_fields`, `entity`, `created_at`)
-            VALUES (:id, '["sptecOrderComment"]', 'sptec_order_comment', :createdAt);
+            INSERT IGNORE INTO `media_default_folder` (`id`, `entity`, `created_at`)
+            VALUES (:id, 'sptec_order_comment', :createdAt);
             SQL;
 
         $connection->executeStatement($query, [

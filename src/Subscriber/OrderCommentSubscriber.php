@@ -14,19 +14,23 @@ use Shopware\Core\Framework\DataAbstractionLayer\Exception\EntityNotFoundExcepti
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentCreatedEvent;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentUpdatedEvent;
+use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentCollection;
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinition;
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentEntity;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-class OrderCommentSubscriber implements EventSubscriberInterface
+readonly class OrderCommentSubscriber implements EventSubscriberInterface
 {
+    /**
+     * @param EntityRepository<OrderCommentCollection> $sptecOrderCommentRepository
+     */
     public function __construct(
-        private readonly EventDispatcherInterface $eventDispatcher,
-        private readonly EntityRepository $orderCommentRepository
-    ) {
-    }
+        private EventDispatcherInterface $eventDispatcher,
+        private EntityRepository $sptecOrderCommentRepository
+    ) {}
 
+    #[\Override]
     public static function getSubscribedEvents(): array
     {
         return [
@@ -82,7 +86,7 @@ class OrderCommentSubscriber implements EventSubscriberInterface
     {
         $criteria = $this->getCommentOrderCriteria($id);
 
-        $orderComment = $this->orderCommentRepository
+        $orderComment = $this->sptecOrderCommentRepository
             ->search($criteria, $context)
             ->first();
 

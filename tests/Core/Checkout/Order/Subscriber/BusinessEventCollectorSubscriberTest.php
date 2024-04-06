@@ -20,7 +20,7 @@ class BusinessEventCollectorSubscriberTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
-        static::assertSame(
+        self::assertSame(
             [
                 BusinessEventCollectorEvent::NAME => ['onCheckoutOrderCommentCreatedEvent', 1000],
             ],
@@ -35,9 +35,9 @@ class BusinessEventCollectorSubscriberTest extends TestCase
         $result = $businessEventCollector->collect($context);
 
         $businessEvent = $result->get(CheckoutOrderCommentCreatedEvent::EVENT_NAME);
-        static::assertSame(CheckoutOrderCommentCreatedEvent::class, $businessEvent->getClass());
+        self::assertSame(CheckoutOrderCommentCreatedEvent::class, $businessEvent?->getClass());
 
         $businessEvent = $result->get(CheckoutOrderCommentUpdatedEvent::EVENT_NAME);
-        static::assertSame(CheckoutOrderCommentUpdatedEvent::class, $businessEvent->getClass());
+        self::assertSame(CheckoutOrderCommentUpdatedEvent::class, $businessEvent?->getClass());
     }
 }

@@ -1,4 +1,3 @@
-import './app/component/filter/sw-boolean-filter';
 import './app/component/media/sw-media-folder-item';
 import './app/component/sptec-media-item';
 import './module/sw-order/page/sw-order-detail';
@@ -9,9 +8,6 @@ import './module/sw-order/component/sptec-order-comments-item';
 
 const { Module } = Shopware;
 
-/**
- * @private
- */
 Module.register('sptec-order-comments', {
     color: '#763b8f',
     icon: 'regular-shopping-bag',

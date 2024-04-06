@@ -3,7 +3,7 @@
     "description": "Comments on the order",
     "type": "shopware-platform-plugin",
     "license": "MIT",
-    "version": "2.0.1",
+    "version": "3.0.0",
     "authors": [
         {
             "name": "Stefan Poensgen"
@@ -39,7 +39,7 @@
         }
     },
     "require": {
-        "shopware/core": "~6.5.0",
-        "shopware/administration": "~6.5.0"
+        "shopware/core": "~6.6.0",
+        "shopware/administration": "~6.6.0"
     }
 }

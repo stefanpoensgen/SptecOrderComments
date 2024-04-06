@@ -9,11 +9,13 @@ use Shopware\Core\Framework\Migration\MigrationStep;
 
 class Migration1663572635 extends MigrationStep
 {
+    #[\Override]
     public function getCreationTimestamp(): int
     {
         return 1663572635;
     }
 
+    #[\Override]
     public function update(Connection $connection): void
     {
         $query = <<<SQL
@@ -37,7 +39,6 @@ class Migration1663572635 extends MigrationStep
         $connection->executeStatement($query);
     }
 
-    public function updateDestructive(Connection $connection): void
-    {
-    }
+    #[\Override]
+    public function updateDestructive(Connection $connection): void {}
 }

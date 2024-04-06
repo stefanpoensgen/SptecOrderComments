@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace SptecOrderComments\Test;
 
 use PHPUnit\Framework\TestCase;
+use Shopware\Core\Checkout\Order\OrderCollection;
 use Shopware\Core\Checkout\Order\OrderEntity;
 use Shopware\Core\Framework\Api\Context\SystemSource;
 use Shopware\Core\Framework\Context;
@@ -14,9 +15,11 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\Test\TestCaseBase\IntegrationTestBehaviour;
 use Shopware\Core\Framework\Uuid\Uuid;
 use Shopware\Core\System\SalesChannel\Context\SalesChannelContextFactory;
+use Shopware\Core\System\User\UserCollection;
 use Shopware\Core\System\User\UserEntity;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentCreatedEvent;
 use SptecOrderComments\Core\Checkout\Order\Event\CheckoutOrderCommentUpdatedEvent;
+use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentCollection;
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinition;
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentEntity;
 use SptecOrderComments\Subscriber\OrderCommentSubscriber;
@@ -25,31 +28,26 @@ class OrderCommentSubscriberTest extends TestCase
 {
     use IntegrationTestBehaviour;
 
-    /**
-     * @var OrderCommentSubscriber
-     */
-    private $orderCommentSubscriber;
+    private OrderCommentSubscriber $orderCommentSubscriber;
+
+    private SalesChannelContextFactory $salesChannelContextFactory;
 
     /**
-     * @var SalesChannelContextFactory
+     * @var EntityRepository<UserCollection>
      */
-    private $salesChannelContextFactory;
+    private EntityRepository $userRepository;
 
     /**
-     * @var EntityRepository
+     * @var EntityRepository<OrderCollection>
      */
-    private $userRepository;
+    private EntityRepository $orderRepository;
 
     /**
-     * @var EntityRepository
+     * @var EntityRepository<OrderCommentCollection>
      */
-    private $orderRepository;
+    private EntityRepository $orderCommentRepository;
 
-    /**
-     * @var EntityRepository
-     */
-    private $orderCommentRepository;
-
+    #[\Override]
     protected function setUp(): void
     {
         $container = $this->getContainer();
@@ -69,7 +67,7 @@ class OrderCommentSubscriberTest extends TestCase
 
     public function testGetSubscribedEvents(): void
     {
-        static::assertSame(
+        self::assertSame(
             [
                 'sptec_order_comment.written' => 'onOrderCommentWritten',
             ],
@@ -100,11 +98,11 @@ class OrderCommentSubscriberTest extends TestCase
         /** @var OrderCommentEntity $orderComment */
         $orderComment = $this->orderCommentRepository->search($criteria, $context)->first();
 
-        static::assertNotNull($event);
-        static::assertNotEmpty($event->getWriteResults()[0]);
-        static::assertSame($content, $orderComment->getContent());
-        static::assertNotNull($orderComment->getMedia());
-        static::assertInstanceOf(CheckoutOrderCommentCreatedEvent::class, $caughtEvent);
+        self::assertNotNull($event);
+        self::assertNotEmpty($event->getWriteResults()[0]);
+        self::assertSame($content, $orderComment->getContent());
+        self::assertNotNull($orderComment->getMedia());
+        self::assertInstanceOf(CheckoutOrderCommentCreatedEvent::class, $caughtEvent);
     }
 
     public function testUpdateOnOrderCommentWritten(): void
@@ -122,10 +120,10 @@ class OrderCommentSubscriberTest extends TestCase
         $writtenEvent = $this->updateOrderComment($content, false);
         $event = $writtenEvent->getEventByEntityName(OrderCommentDefinition::ENTITY_NAME);
 
-        static::assertNotNull($event);
-        static::assertNotEmpty($event->getWriteResults()[0]);
-        static::assertSame($content, $event->getWriteResults()[0]->getPayload()['content']);
-        static::assertInstanceOf(CheckoutOrderCommentUpdatedEvent::class, $caughtEvent);
+        self::assertNotNull($event);
+        self::assertNotEmpty($event->getWriteResults()[0]);
+        self::assertSame($content, $event->getWriteResults()[0]->getPayload()['content']);
+        self::assertInstanceOf(CheckoutOrderCommentUpdatedEvent::class, $caughtEvent);
     }
 
     private function createOrderComment(string $content, bool $internal = true): EntityWrittenContainerEvent

@@ -8,12 +8,11 @@ use Shopware\Core\Content\Media\Event\MediaFileExtensionWhitelistEvent;
 use Shopware\Core\System\SystemConfig\SystemConfigService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
-class MediaFileExtensionWhitelistSubscriber implements EventSubscriberInterface
+readonly class MediaFileExtensionWhitelistSubscriber implements EventSubscriberInterface
 {
-    public function __construct(private readonly SystemConfigService $systemConfigService)
-    {
-    }
+    public function __construct(private SystemConfigService $systemConfigService) {}
 
+    #[\Override]
     public static function getSubscribedEvents(): array
     {
         return [
