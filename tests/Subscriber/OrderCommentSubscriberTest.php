@@ -172,4 +172,87 @@ class OrderCommentSubscriberTest extends TestCase
             ],
         ], $context);
     }
+
+    /**
+     * Tests to ensure events are dispatched only for authorized users when internal comments are created or updated.
+     */
+    public function testEventDispatchForAuthorizedUsersOnInternalComments(): void
+    {
+        $caughtEvent = null;
+        $this->addEventListener(
+            $this->getContainer()->get('event_dispatcher'),
+            CheckoutOrderCommentCreatedEvent::class,
+            static function ($event) use (&$caughtEvent): void {
+                $caughtEvent = $event;
+            }
+        );
+
+        // Simulate creating an internal comment as an authorized user
+        $content = 'Internal comment for authorized users';
+        $this->createOrderComment($content, true);
+
+        // Assert that the event was caught and is of the correct type
+        self::assertNotNull($caughtEvent);
+        self::assertInstanceOf(CheckoutOrderCommentCreatedEvent::class, $caughtEvent);
+
+        // Reset for the next test
+        $caughtEvent = null;
+
+        // Simulate updating an internal comment as an unauthorized user
+        $context = new Context(new SystemSource());
+        $context->addExtension('isAuthorized', false); // Simulate an unauthorized context
+
+        $content = 'Updated internal comment for unauthorized users';
+        $this->updateOrderComment($content, true, $context);
+
+        // Assert that the event was not caught due to lack of authorization
+        self::assertNull($caughtEvent);
+    }
+
+    private function updateOrderComment(string $content, bool $internal = true, ?Context $context = null): EntityWrittenContainerEvent
+    {
+        $context = $context ?? new Context(new SystemSource());
+
+        $writtenEvent = $this->createOrderComment('updateMe', $internal, $context);
+        $id = $writtenEvent->getPrimaryKeys(OrderCommentDefinition::ENTITY_NAME)[0];
+
+        return $this->orderCommentRepository->update([
+            [
+                'id' => $id,
+                'content' => $content,
+                'internal' => $internal,
+            ],
+        ], $context);
+    }
+
+    private function createOrderComment(string $content, bool $internal = true, ?Context $context = null): EntityWrittenContainerEvent
+    {
+        $context = $context ?? new Context(new SystemSource());
+
+        /** @var UserEntity $user */
+        $user = $this->userRepository->search(new Criteria(), $context)->first();
+
+        /** @var OrderEntity $order */
+        $order = $this->orderRepository->search(new Criteria(), $context)->first();
+
+        $mediaId = Uuid::randomHex();
+
+        return $this->orderCommentRepository->create([
+            [
+                'orderId' => $order->getId(),
+                'content' => $content,
+                'internal' => $internal,
+                'createdById' => $user->getId(),
+                'media' => [
+                    [
+                        'id' => $mediaId,
+                        'media' => [
+                            'id' => $mediaId,
+                            'name' => 'test file',
+                        ],
+                    ],
+                ],
+            ],
+        ], $context);
+    }
 }

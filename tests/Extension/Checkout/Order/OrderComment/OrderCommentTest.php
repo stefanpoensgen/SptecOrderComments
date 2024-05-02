@@ -106,4 +106,49 @@ class OrderCommentTest extends TestCase
 
         return $orderId;
     }
+
+    /**
+     * Tests the filtering functionality of OrderComment based on user roles and permissions for internal comments.
+     */
+    public function testFilteringOrderCommentsBasedOnUserRolesAndPermissions(): void
+    {
+        $context = new Context(new SystemSource());
+        $orderCommentId = Uuid::randomHex();
+        $orderId = $this->createOrderComment($orderCommentId, internal: true);
+
+        // Simulate a user with insufficient permissions trying to access internal comments
+        $criteria = new Criteria([$orderId]);
+        $criteria->addAssociation('sptecOrderComments');
+        $criteria->getAssociation('sptecOrderComments')->addFilter(new EqualsFilter('internal', true));
+
+        /** @var OrderEntity $order */
+        $order = $this->orderRepository->search($criteria, $context)->first();
+
+        /** @var OrderCommentCollection $orderComments */
+        $orderComments = $order->getExtension('sptecOrderComments');
+
+        // Assert that the user cannot access internal comments
+        self::assertEmpty($orderComments);
+    }
+
+    private function createOrderComment(string $orderCommentId, bool $internal = false): string
+    {
+        $context = new Context(new SystemSource());
+        $orderId = $this->orderRepository->searchIds(new Criteria(), $context)->firstId();
+        $userId = $this->userRepository->searchIds(new Criteria(), $context)->firstId();
+
+        self::assertNotNull($orderId);
+        self::assertNotNull($userId);
+
+        $this->orderCommentRepository->upsert([[
+            'id' => $orderCommentId,
+            'orderId' => $orderId,
+            'createdById' => $userId,
+            'internal' => $internal,
+            'task' => false,
+            'content' => 'Internal comment only visible to authorized users',
+        ]], $context);
+
+        return $orderId;
+    }
 }
