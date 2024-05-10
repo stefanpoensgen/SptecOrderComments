@@ -14,6 +14,7 @@ use Shopware\Core\Framework\Event\CustomerAware;
 use Shopware\Core\Framework\Event\EventData\EntityType;
 use Shopware\Core\Framework\Event\EventData\EventDataCollection;
 use Shopware\Core\Framework\Event\EventData\MailRecipientStruct;
+use Shopware\Core\Framework\Event\FlowEventAware;
 use Shopware\Core\Framework\Event\MailAware;
 use Shopware\Core\Framework\Event\OrderAware;
 use Shopware\Core\Framework\Event\SalesChannelAware;
@@ -21,7 +22,7 @@ use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentDefinit
 use SptecOrderComments\Extension\Checkout\Order\OrderComment\OrderCommentEntity;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAware, OrderAware, MailAware, CustomerAware
+class CheckoutOrderCommentCreatedEvent extends Event implements SalesChannelAware, OrderAware, MailAware, CustomerAware, FlowEventAware
 {
     public const EVENT_NAME = 'checkout.order.comment.created';
 
